@@ -1,0 +1,282 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+:root,
+:host {
+  /* Light */
+  /* primary */
+  --prisma-state-layers-light-primary-opacity-08: #4e4fc414;
+  --prisma-state-layers-light-primary-opacity-12: #4e4fc41f;
+  --prisma-state-layers-light-primary-opacity-16: #4e4fc429;
+
+  --prisma-state-layers-light-on-primary-opacity-08: #ffffff14;
+  --prisma-state-layers-light-on-primary-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-on-primary-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-primary-container-opacity-08: #e1dfff14;
+  --prisma-state-layers-light-primary-container-opacity-12: #e1dfff1f;
+  --prisma-state-layers-light-primary-container-opacity-16: #e1dfff29;
+
+  --prisma-state-layers-light-on-primary-container-opacity-08: #08006c14;
+  --prisma-state-layers-light-on-primary-container-opacity-12: #08006c1f;
+  --prisma-state-layers-light-on-primary-container-opacity-16: #08006c29;
+
+  /* secondary */
+  --prisma-state-layers-light-secondary-opacity-08: #5d5c7214;
+  --prisma-state-layers-light-secondary-opacity-12: #5d5c721f;
+  --prisma-state-layers-light-secondary-opacity-16: #5d5c7229;
+
+  --prisma-state-layers-light-on-secondary-opacity-08: #ffffff14;
+  --prisma-state-layers-light-on-secondary-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-on-secondary-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-secondary-container-opacity-08: #e2e0f914;
+  --prisma-state-layers-light-secondary-container-opacity-12: #e2e0f91f;
+  --prisma-state-layers-light-secondary-container-opacity-16: #e2e0f929;
+
+  --prisma-state-layers-light-on-secondary-container-opacity-08: #1a1a2c14;
+  --prisma-state-layers-light-on-secondary-container-opacity-12: #1a1a2c1f;
+  --prisma-state-layers-light-on-secondary-container-opacity-16: #1a1a2c29;
+
+  /* tertiary */
+  --prisma-state-layers-light-tertiary-opacity-08: #006d3a14;
+  --prisma-state-layers-light-tertiary-opacity-12: #006d3a1f;
+  --prisma-state-layers-light-tertiary-opacity-16: #006d3a29;
+
+  --prisma-state-layers-light-on-tertiary-opacity-08: #ffffff14;
+  --prisma-state-layers-light-on-tertiary-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-on-tertiary-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-tertiary-container-opacity-08: #8ff8af14;
+  --prisma-state-layers-light-tertiary-container-opacity-12: #8ff8af1f;
+  --prisma-state-layers-light-tertiary-container-opacity-16: #8ff8af29;
+
+  --prisma-state-layers-light-on-tertiary-container-opacity-08: #00210d14;
+  --prisma-state-layers-light-on-tertiary-container-opacity-12: #00210d1f;
+  --prisma-state-layers-light-on-tertiary-container-opacity-16: #00210d29;
+
+  /* error */
+  --prisma-state-layers-light-error-opacity-08: #ba1a1a14;
+  --prisma-state-layers-light-error-opacity-12: #ba1a1a1f;
+  --prisma-state-layers-light-error-opacity-16: #ba1a1a29;
+
+  --prisma-state-layers-light-error-container-opacity-08: #ffdad614;
+  --prisma-state-layers-light-error-container-opacity-12: #ffdad61f;
+  --prisma-state-layers-light-error-container-opacity-16: #ffdad629;
+
+  --prisma-state-layers-light-on-error-opacity-08: #ffffff14;
+  --prisma-state-layers-light-on-error-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-on-error-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-on-error-container-opacity-08: #41000214;
+  --prisma-state-layers-light-on-error-container-opacity-12: #4100021f;
+  --prisma-state-layers-light-on-error-container-opacity-16: #41000229;
+
+  /* background */
+  --prisma-state-layers-light-background-opacity-08: #ffffff14;
+  --prisma-state-layers-light-background-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-background-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-on-background-opacity-08: #1f1f1f14;
+  --prisma-state-layers-light-on-background-opacity-12: #1f1f1f1f;
+  --prisma-state-layers-light-on-background-opacity-16: #1f1f1f29;
+
+  /* surface */
+  --prisma-state-layers-light-surface-opacity-08: #ffffff14;
+  --prisma-state-layers-light-surface-opacity-12: #ffffff1f;
+  --prisma-state-layers-light-surface-opacity-16: #ffffff29;
+
+  --prisma-state-layers-light-on-surface-opacity-08: #1f1f1f14;
+  --prisma-state-layers-light-on-surface-opacity-12: #1f1f1f1f;
+  --prisma-state-layers-light-on-surface-opacity-16: #1f1f1f29;
+
+  --prisma-state-layers-light-surface-variant-opacity-08: #e1e3e114;
+  --prisma-state-layers-light-surface-variant-opacity-12: #e1e3e11f;
+  --prisma-state-layers-light-surface-variant-opacity-16: #e1e3e129;
+
+  --prisma-state-layers-light-on-surface-variant-opacity-08: #44474614;
+  --prisma-state-layers-light-on-surface-variant-opacity-12: #4447461f;
+  --prisma-state-layers-light-on-surface-variant-opacity-16: #44474629;
+
+  /* outline */
+  --prisma-state-layers-light-outline-opacity-08: #74777514;
+  --prisma-state-layers-light-outline-opacity-12: #7477751f;
+  --prisma-state-layers-light-outline-opacity-16: #74777529;
+
+  --prisma-state-layers-light-outline-variant-opacity-08: #c4c7c514;
+  --prisma-state-layers-light-outline-variant-opacity-12: #c4c7c51f;
+  --prisma-state-layers-light-outline-variant-opacity-16: #c4c7c529;
+
+  /* inverse */
+  --prisma-state-layers-light-inverse-surface-opacity-08: #30303014;
+  --prisma-state-layers-light-inverse-surface-opacity-12: #3030301f;
+  --prisma-state-layers-light-inverse-surface-opacity-16: #30303029;
+
+  --prisma-state-layers-light-inverse-on-surface-opacity-08: #f2f2f214;
+  --prisma-state-layers-light-inverse-on-surface-opacity-12: #f2f2f21f;
+  --prisma-state-layers-light-inverse-on-surface-opacity-16: #f2f2f229;
+
+  --prisma-state-layers-light-inverse-primary-opacity-08: #c1c1ff14;
+  --prisma-state-layers-light-inverse-primary-opacity-12: #c1c1ff1f;
+  --prisma-state-layers-light-inverse-primary-opacity-16: #c1c1ff29;
+
+  /* shadow */
+  --prisma-state-layers-light-shadow-opacity-08: #00000014;
+  --prisma-state-layers-light-shadow-opacity-12: #0000001f;
+  --prisma-state-layers-light-shadow-opacity-16: #00000029;
+
+  /* tint */
+  --prisma-state-layers-light-surface-tint-opacity-08: #4e4fc414;
+  --prisma-state-layers-light-surface-tint-opacity-12: #4e4fc41f;
+  --prisma-state-layers-light-surface-tint-opacity-16: #4e4fc429;
+
+  /* scrim */
+  --prisma-state-layers-light-scrim-opacity-08: #00000014;
+  --prisma-state-layers-light-scrim-opacity-12: #0000001f;
+  --prisma-state-layers-light-scrim-opacity-16: #00000029;
+
+  /* Dark */
+  /* primary */
+  --prisma-state-layers-dark-primary-opacity-08: #c1c1ff14;
+  --prisma-state-layers-dark-primary-opacity-12: #c1c1ff1f;
+  --prisma-state-layers-dark-primary-opacity-16: #c1c1ff29;
+
+  --prisma-state-layers-dark-on-primary-opacity-08: #1b169614;
+  --prisma-state-layers-dark-on-primary-opacity-12: #1b16961f;
+  --prisma-state-layers-dark-on-primary-opacity-16: #1b169629;
+
+  --prisma-state-layers-dark-primary-container-opacity-08: #3535ab14;
+  --prisma-state-layers-dark-primary-container-opacity-12: #3535ab1f;
+  --prisma-state-layers-dark-primary-container-opacity-16: #3535ab29;
+
+  --prisma-state-layers-dark-on-primary-container-opacity-08: #e1dfff14;
+  --prisma-state-layers-dark-on-primary-container-opacity-12: #e1dfff1f;
+  --prisma-state-layers-dark-on-primary-container-opacity-16: #e1dfff29;
+
+  /* secondary */
+  --prisma-state-layers-dark-secondary-opacity-08: #c6c4dd14;
+  --prisma-state-layers-dark-secondary-opacity-12: #c6c4dd1f;
+  --prisma-state-layers-dark-secondary-opacity-16: #c6c4dd29;
+
+  --prisma-state-layers-dark-on-secondary-opacity-08: #2f2f4214;
+  --prisma-state-layers-dark-on-secondary-opacity-12: #2f2f421f;
+  --prisma-state-layers-dark-on-secondary-opacity-16: #2f2f4229;
+
+  --prisma-state-layers-dark-secondary-container-opacity-08: #45455914;
+  --prisma-state-layers-dark-secondary-container-opacity-12: #4545591f;
+  --prisma-state-layers-dark-secondary-container-opacity-16: #45455929;
+
+  --prisma-state-layers-dark-on-secondary-container-opacity-08: #e2e0f914;
+  --prisma-state-layers-dark-on-secondary-container-opacity-12: #e2e0f91f;
+  --prisma-state-layers-dark-on-secondary-container-opacity-16: #e2e0f929;
+
+  /* tertiary */
+  --prisma-state-layers-dark-tertiary-opacity-08: #73db9514;
+  --prisma-state-layers-dark-tertiary-opacity-12: #73db951f;
+  --prisma-state-layers-dark-tertiary-opacity-16: #73db9529;
+
+  --prisma-state-layers-dark-on-tertiary-opacity-08: #00391b14;
+  --prisma-state-layers-dark-on-tertiary-opacity-12: #00391b1f;
+  --prisma-state-layers-dark-on-tertiary-opacity-16: #00391b29;
+
+  --prisma-state-layers-dark-tertiary-container-opacity-08: #00522a14;
+  --prisma-state-layers-dark-tertiary-container-opacity-12: #00522a1f;
+  --prisma-state-layers-dark-tertiary-container-opacity-16: #00522a29;
+
+  --prisma-state-layers-dark-on-tertiary-container-opacity-08: #8ff8af14;
+  --prisma-state-layers-dark-on-tertiary-container-opacity-12: #8ff8af1f;
+  --prisma-state-layers-dark-on-tertiary-container-opacity-16: #8ff8af29;
+
+  /* error */
+  --prisma-state-layers-dark-error-opacity-08: #ffb4ab14;
+  --prisma-state-layers-dark-error-opacity-12: #ffb4ab1f;
+  --prisma-state-layers-dark-error-opacity-16: #ffb4ab29;
+
+  --prisma-state-layers-dark-on-error-opacity-08: #69000514;
+  --prisma-state-layers-dark-on-error-opacity-12: #6900051f;
+  --prisma-state-layers-dark-on-error-opacity-16: #69000529;
+
+  --prisma-state-layers-dark-error-container-opacity-08: #93000a14;
+  --prisma-state-layers-dark-error-container-opacity-12: #93000a1f;
+  --prisma-state-layers-dark-error-container-opacity-16: #93000a29;
+
+  --prisma-state-layers-dark-on-error-container-opacity-08: #ffdad614;
+  --prisma-state-layers-dark-on-error-container-opacity-12: #ffdad61f;
+  --prisma-state-layers-dark-on-error-container-opacity-16: #ffdad629;
+
+  /* background */
+  --prisma-state-layers-dark-background-opacity-08: #1f1f1f14;
+  --prisma-state-layers-dark-background-opacity-12: #1f1f1f1f;
+  --prisma-state-layers-dark-background-opacity-16: #1f1f1f29;
+
+  --prisma-state-layers-dark-on-background-opacity-08: #e3e3e314;
+  --prisma-state-layers-dark-on-background-opacity-12: #e3e3e31f;
+  --prisma-state-layers-dark-on-background-opacity-16: #e3e3e329;
+
+  /* surface */
+  --prisma-state-layers-dark-surface-opacity-08: #1f1f1f14;
+  --prisma-state-layers-dark-surface-opacity-12: #1f1f1f1f;
+  --prisma-state-layers-dark-surface-opacity-16: #1f1f1f29;
+
+  --prisma-state-layers-dark-on-surface-opacity-08: #e3e3e314;
+  --prisma-state-layers-dark-on-surface-opacity-12: #e3e3e31f;
+  --prisma-state-layers-dark-on-surface-opacity-16: #e3e3e329;
+
+  --prisma-state-layers-dark-surface-variant-opacity-08: #44474614;
+  --prisma-state-layers-dark-surface-variant-opacity-12: #4447461f;
+  --prisma-state-layers-dark-surface-variant-opacity-16: #44474629;
+
+  --prisma-state-layers-dark-on-surface-variant-opacity-08: #c4c7c514;
+  --prisma-state-layers-dark-on-surface-variant-opacity-12: #c4c7c51f;
+  --prisma-state-layers-dark-on-surface-variant-opacity-16: #c4c7c529;
+
+  /* tint */
+  --prisma-state-layers-dark-surface-tint-opacity-08: #c1c1ff14;
+  --prisma-state-layers-dark-surface-tint-opacity-12: #c1c1ff1f;
+  --prisma-state-layers-dark-surface-tint-opacity-16: #c1c1ff29;
+
+  /* outline */
+  --prisma-state-layers-dark-outline-opacity-08: #8e918f14;
+  --prisma-state-layers-dark-outline-opacity-12: #8e918f1f;
+  --prisma-state-layers-dark-outline-opacity-16: #8e918f29;
+
+  --prisma-state-layers-dark-outline-variant-opacity-08: #c4c7c514;
+  --prisma-state-layers-dark-outline-variant-opacity-12: #c4c7c51f;
+  --prisma-state-layers-dark-outline-variant-opacity-16: #c4c7c529;
+
+  /* inverse */
+  --prisma-state-layers-dark-inverse-on-surface-opacity-08: #191d1c14;
+  --prisma-state-layers-dark-inverse-on-surface-opacity-12: #191d1c1f;
+  --prisma-state-layers-dark-inverse-on-surface-opacity-16: #191d1c29;
+
+  --prisma-state-layers-dark-inverse-surface-opacity-08: #e3e3e314;
+  --prisma-state-layers-dark-inverse-surface-opacity-12: #e3e3e31f;
+  --prisma-state-layers-dark-inverse-surface-opacity-16: #e3e3e329;
+
+  --prisma-state-layers-dark-inverse-primary-opacity-08: #4e4fc414;
+  --prisma-state-layers-dark-inverse-primary-opacity-12: #4e4fc41f;
+  --prisma-state-layers-dark-inverse-primary-opacity-16: #4e4fc429;
+
+  /* shadow */
+  --prisma-state-layers-dark-shadow-opacity-08: #00000014;
+  --prisma-state-layers-dark-shadow-opacity-12: #0000001f;
+  --prisma-state-layers-dark-shadow-opacity-16: #00000029;
+
+  /* scrim */
+  --prisma-state-layers-dark-scrim-opacity-08: #00000014;
+  --prisma-state-layers-dark-scrim-opacity-12: #0000001f;
+  --prisma-state-layers-dark-scrim-opacity-16: #00000029;
+}

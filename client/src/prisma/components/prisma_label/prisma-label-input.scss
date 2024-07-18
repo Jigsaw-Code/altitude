@@ -1,0 +1,370 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../tokens/state-layers';
+@use '../../tokens/theme/theme';
+
+.prisma-label.input {
+  gap: 8px;
+  padding: 3px 12px 3px 8px;
+  border: none;
+  border-radius: 20px;
+
+  prisma-badge {
+    display: none;
+  }
+
+  &:hover {
+    prisma-icon.label {
+      display: none;
+    }
+  }
+
+  &:focus {
+    border-width: 1px;
+    border-style: solid;
+  }
+}
+
+/* Primary */
+.input.primary {
+  background-color: var(--prisma-sys-color-primary);
+  color: var(--prisma-sys-color-on-primary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-primary-container);
+    color: var(--prisma-sys-color-primary);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-sys-color-primary);
+      --md-icon-button-icon-color: var(--prisma-sys-color-primary);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-primary);
+  }
+}
+
+/* secondary */
+.input.secondary {
+  background-color: var(--prisma-sys-color-secondary);
+  color: var(--prisma-sys-color-on-secondary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-secondary-container);
+    color: var(--prisma-sys-color-secondary);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-sys-color-secondary);
+      --md-icon-button-icon-color: var(--prisma-sys-color-secondary);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-secondary);
+  }
+}
+
+/* tertiary */
+.input.tertiary {
+  background-color: var(--prisma-sys-color-tertiary);
+  color: var(--prisma-sys-color-on-tertiary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-tertiary-container);
+    color: var(--prisma-sys-color-tertiary);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-sys-color-tertiary);
+      --md-icon-button-icon-color: var(--prisma-sys-color-tertiary);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-tertiary);
+  }
+}
+
+/* error */
+.input.error {
+  background-color: var(--prisma-sys-color-error);
+  color: var(--prisma-sys-color-on-error);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-error-container);
+    color: var(--prisma-sys-color-error);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-sys-color-error);
+      --md-icon-button-icon-color: var(--prisma-sys-color-error);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-error);
+  }
+}
+
+/* ocher */
+.input.ocher {
+  background-color: var(--prisma-extended-color-ocher);
+  color: var(--prisma-extended-color-on-ocher);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-ocher-container);
+    color: var(--prisma-extended-color-ocher);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-ocher);
+      --md-icon-button-icon-color: var(--prisma-extended-color-ocher);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-ocher);
+  }
+}
+
+/* orange */
+.input.orange {
+  background-color: var(--prisma-extended-color-orange);
+  color: var(--prisma-extended-color-on-orange);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-orange-container);
+    color: var(--prisma-extended-color-orange);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-orange);
+      --md-icon-button-icon-color: var(--prisma-extended-color-orange);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-orange);
+  }
+}
+
+/* yellow */
+.input.yellow {
+  background-color: var(--prisma-extended-color-yellow);
+  color: var(--prisma-extended-color-on-yellow);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-yellow-container);
+    color: var(--prisma-extended-color-yellow);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-yellow);
+      --md-icon-button-icon-color: var(--prisma-extended-color-yellow);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-yellow);
+  }
+}
+
+/* rose */
+.input.rose {
+  background-color: var(--prisma-extended-color-rose);
+  color: var(--prisma-extended-color-on-rose);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-rose-container);
+    color: var(--prisma-extended-color-rose);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-rose);
+      --md-icon-button-icon-color: var(--prisma-extended-color-rose);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-rose);
+  }
+}
+
+/* pink */
+.input.pink {
+  background-color: var(--prisma-extended-color-pink);
+  color: var(--prisma-extended-color-on-pink);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-pink-container);
+    color: var(--prisma-extended-color-pink);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-pink);
+      --md-icon-button-icon-color: var(--prisma-extended-color-pink);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-pink);
+  }
+}
+
+/* purple */
+.input.purple {
+  background-color: var(--prisma-extended-color-purple);
+  color: var(--prisma-extended-color-on-purple);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-purple-container);
+    color: var(--prisma-extended-color-purple);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-purple);
+      --md-icon-button-icon-color: var(--prisma-extended-color-purple);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-purple);
+  }
+}
+
+/* blue */
+.input.blue {
+  background-color: var(--prisma-extended-color-blue);
+  color: var(--prisma-extended-color-on-blue);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-blue-container);
+    color: var(--prisma-extended-color-blue);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-blue);
+      --md-icon-button-icon-color: var(--prisma-extended-color-blue);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-blue);
+  }
+}
+
+/* light-blue */
+.input.light-blue {
+  background-color: var(--prisma-extended-color-light-blue);
+  color: var(--prisma-extended-color-on-light-blue);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-light-blue-container);
+    color: var(--prisma-extended-color-light-blue);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(
+        --prisma-extended-color-light-blue
+      );
+      --md-icon-button-icon-color: var(--prisma-extended-color-light-blue);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-light-blue);
+  }
+}
+
+/* teal */
+.input.teal {
+  background-color: var(--prisma-extended-color-teal);
+  color: var(--prisma-extended-color-on-teal);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-teal-container);
+    color: var(--prisma-extended-color-teal);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-teal);
+      --md-icon-button-icon-color: var(--prisma-extended-color-teal);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-teal);
+  }
+}
+
+/* green */
+.input.green {
+  background-color: var(--prisma-extended-color-green);
+  color: var(--prisma-extended-color-on-green);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-green-container);
+    color: var(--prisma-extended-color-green);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-green);
+      --md-icon-button-icon-color: var(--prisma-extended-color-green);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-green);
+  }
+}
+
+/* olive */
+.input.olive {
+  background-color: var(--prisma-extended-color-olive);
+  color: var(--prisma-extended-color-on-olive);
+
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-olive-container);
+    color: var(--prisma-extended-color-olive);
+    // close icon
+    md-icon-button.close {
+      --md-icon-button-hover-icon-color: var(--prisma-extended-color-olive);
+      --md-icon-button-icon-color: var(--prisma-extended-color-olive);
+    }
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-olive);
+  }
+}
+
+/* Disabled State */
+.input[disabled],
+.input[selected][disabled] {
+  pointer-events: none;
+  color: var(--prisma-sys-color-on-surface);
+  background-color: var(--prisma-state-layers-on-surface-opacity-12);
+
+  prisma-icon,
+  prisma-text {
+    opacity: var(--prisma-opacity-disabled);
+  }
+}

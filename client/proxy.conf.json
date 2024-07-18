@@ -1,0 +1,8 @@
+{
+  "**/data/**": {
+    "target": "http://gateway:80",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

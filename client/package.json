@@ -1,0 +1,155 @@
+{
+  "name": "altitude-client",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run build:prisma-styles && ng serve --host 0.0.0.0 --poll 500",
+    "build": "npm run build:prisma-styles && ng build",
+    "prebuild:prisma-styles": "sass --style=compressed --load-path=node_modules --load-path=node_modules/sass-true/sass src/prisma",
+    "build:prisma-styles": "find src/prisma -name '*.css' -type f | xargs node css-to-ts.js",
+    "postbuild:prisma-styles": "find src/prisma -name '*.css' -o -name '*.css.map' -type f | xargs rm",
+    "watch": "ng build --watch --configuration development",
+    "clean": "find src/prisma -name '*.css.ts' -type f | xargs rm && npm ci",
+    "test": "npm run build:prisma-styles && ng test",
+    "test:ci": "npm run test -- --watch=false --browsers=ChromeHeadlessCI --code-coverage",
+    "format": "pretty-quick --staged --pattern \"**/*.{cjs,mjs,html,js,json,md,scss,ts}\"",
+    "lint": "eslint --ext ts --max-warnings=0 src",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "private": true,
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/typescript",
+      "plugin:import/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "compat",
+      "import"
+    ],
+    "rules": {
+      "@typescript-eslint/lines-between-class-members": [
+        "error",
+        "always",
+        {
+          "exceptAfterSingleLine": true
+        }
+      ],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_$",
+          "varsIgnorePattern": "^_$"
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "angular",
+              "group": "external",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "angular"
+          ],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ],
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    }
+  },
+  "eslintIgnore": [
+    "**/prisma/**"
+  ],
+  "dependencies": {
+    "@angular/animations": "^15.0.3",
+    "@angular/cdk": "^15.0.2",
+    "@angular/common": "^15.0.3",
+    "@angular/compiler": "^15.0.3",
+    "@angular/core": "^15.0.3",
+    "@angular/forms": "^15.0.3",
+    "@angular/material": "^15.0.2",
+    "@angular/platform-browser": "^15.0.3",
+    "@angular/platform-browser-dynamic": "^15.0.3",
+    "@angular/router": "^15.0.3",
+    "@material/mwc-ripple": "^0.27.0",
+    "@material/web": "^1.0.1",
+    "dayjs": "^1.11.7",
+    "flask": "^0.2.10",
+    "lit": "^2.7.5",
+    "ngx-tippy-wrapper": "^6.2.2",
+    "rxjs": "~7.5.0",
+    "tippy.js": "^6.3.7",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.0.3",
+    "@angular-eslint/builder": "15.2.1",
+    "@angular-eslint/eslint-plugin": "15.2.1",
+    "@angular-eslint/eslint-plugin-template": "15.2.1",
+    "@angular-eslint/schematics": "15.2.1",
+    "@angular-eslint/template-parser": "15.2.1",
+    "@angular/cli": "~15.0.3",
+    "@angular/compiler-cli": "^15.0.3",
+    "@types/jasmine": "~4.0.0",
+    "@typescript-eslint/eslint-plugin": "5.48.2",
+    "@typescript-eslint/parser": "5.48.2",
+    "dayjs-plugin-utc": "^0.1.2",
+    "eslint": "^8.33.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-compat": "^4.0.2",
+    "eslint-plugin-import": "^2.27.5",
+    "jasmine-core": "~4.3.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "karma-junit-reporter": "^2.0.1",
+    "mockdate": "^3.0.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.1",
+    "pretty-quick": "^2.0.2",
+    "sass": "^1.63.6",
+    "sass-true": "^7.0.0",
+    "typescript": "~4.8.4"
+  }
+}

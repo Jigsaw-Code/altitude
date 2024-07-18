@@ -1,0 +1,177 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use '../../../prisma/tokens/theme/theme';
+
+:host {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--prisma-shape-medium);
+}
+
+.details {
+  flex: 1;
+  min-width: 600px;
+}
+
+.details mat-card-content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: var(--prisma-shape-extra-extra-large);
+}
+
+.details .metadata {
+  color: var(--prisma-sys-color-on-surface-variant);
+  display: flex;
+  flex-direction: column;
+  gap: var(--prisma-shape-extra-extra-large);
+  max-width: 80%;
+}
+
+.metadata prisma-text {
+  word-break: break-all;
+}
+
+.details .metadata .url {
+  display: flex;
+  gap: var(--prisma-shape-extra-small);
+}
+
+.details .metadata ul {
+  align-content: start;
+  align-items: center;
+  column-gap: var(--prisma-shape-large);
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.details .metadata ul > li {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  gap: var(--prisma-shape-extra-small);
+  padding: var(--prisma-shape-extra-small);
+}
+
+.details mat-card-footer prisma-text {
+  margin-bottom: var(--prisma-shape-medium);
+}
+
+app-flagger:not(:last-child) {
+  margin-bottom: var(--prisma-shape-medium);
+}
+
+prisma-icon {
+  align-items: center;
+}
+
+.decision mat-card-content {
+  align-items: center;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  max-width: 400px;
+  gap: var(--prisma-shape-large);
+}
+
+.decision mat-card-content > *:nth-child(-n + 2) {
+  align-self: start;
+}
+
+.decision mat-card-content md-checkbox {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.decision mat-card-content a {
+  align-items: center;
+  display: flex;
+  gap: var(--prisma-shape-small);
+}
+
+.decision mat-card-content .notes {
+  align-items: center;
+  display: grid;
+  gap: var(--prisma-shape-small);
+  grid-column: 1 / 3;
+  grid-template-areas:
+    'icon label'
+    'textarea textarea'
+    'footer footer';
+  grid-template-columns: min-content 1fr;
+}
+
+.decision mat-card-content .notes mat-icon {
+  grid-area: icon;
+}
+
+.decision mat-card-content .notes prisma-text {
+  grid-area: label;
+}
+
+.decision mat-card-content .notes textarea {
+  grid-area: textarea;
+  height: 100px;
+  resize: vertical;
+}
+
+.decision mat-card-content .notes footer {
+  grid-area: footer;
+  height: 1rem;
+}
+
+.decision mat-card-footer {
+  display: flex;
+  gap: var(--prisma-shape-large);
+  justify-content: space-around;
+  padding: var(--prisma-shape-large);
+}
+
+.decision mat-card-footer button {
+  border-radius: var(--prisma-shape-large);
+  display: flex;
+  font-weight: 400;
+  height: 3rem;
+  justify-content: start;
+  width: 170px;
+}
+
+.decision mat-card-footer button span {
+  display: flex;
+  gap: var(--prisma-shape-extra-small);
+  padding: var(--prisma-shape-extra-small);
+}
+
+.decision mat-card-footer button.error {
+  background-color: var(--prisma-ref-palette-error-95);
+}
+
+.decision mat-card-footer button.green {
+  background-color: var(--prisma-ref-palette-tertiary-99);
+}
+
+@media (prefers-color-scheme: dark) {
+  .decision mat-card-footer button.error {
+    background-color: var(--prisma-ref-palette-error-20);
+  }
+
+  .decision mat-card-footer button.green {
+    background-color: var(--prisma-ref-palette-tertiary-10);
+  }
+}

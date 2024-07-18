@@ -1,0 +1,245 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../../../tokens/reset';
+@use '../../../../tokens/theme/theme';
+
+.prisma-icon-group {
+  display: flex;
+  color: var(--prisma-sys-color-on-surface-variant);
+  padding-right: 16px;
+  max-width: fit-content;
+  --mdc-icon-size: 24px;
+  --mdc-icon-button-size: 40px;
+}
+
+md-icon-button {
+  --md-icon-button-icon-size: 24px;
+  --md-icon-button-icon-color: var(--prisma-sys-color-on-surface-variant);
+
+  --md-icon-button-icon-color: var(--prisma-sys-color-on-surface-variant);
+  --md-icon-button-hover-icon-color: var(--prisma-sys-color-on-surface-variant);
+  --md-icon-button-focus-icon-color: var(--prisma-sys-color-on-surface-variant);
+  --md-icon-button-pressed-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+}
+
+.toggle-neutral[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-sys-color-on-surface);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-sys-color-on-surface
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-sys-color-on-surface
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-sys-color-on-surface
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-sys-color-on-surface);
+}
+
+.toggle-neutral-variant[selected] {
+  --md-icon-button-selected-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+  --md-icon-button-disabled-icon-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+}
+
+.toggle-primary[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-sys-color-primary);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-sys-color-primary);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-sys-color-primary);
+  --md-icon-button-selected-pressed-icon-color: var(--prisma-sys-color-primary);
+  --md-icon-button-disabled-icon-color: var(--prisma-sys-color-primary);
+}
+
+.toggle-secondary[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-sys-color-secondary);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-sys-color-secondary);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-sys-color-secondary);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-sys-color-secondary
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-sys-color-secondary);
+}
+
+.toggle-tertiary[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-sys-color-tertiary);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-sys-color-tertiary);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-sys-color-tertiary);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-sys-color-tertiary
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-sys-color-tertiary);
+}
+
+.toggle-error[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-sys-color-error);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-sys-color-error);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-sys-color-error);
+  --md-icon-button-selected-pressed-icon-color: var(--prisma-sys-color-error);
+  --md-icon-button-disabled-icon-color: var(--prisma-sys-color-error);
+}
+
+.toggle-ocher[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-ocher);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-ocher
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-ocher
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-ocher
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-ocher);
+}
+
+.toggle-orange[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-orange);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-orange
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-orange
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-orange
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-orange);
+}
+
+.toggle-yellow[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-yellow);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-yellow
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-yellow
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-yellow
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-yellow);
+}
+
+.toggle-rose[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-rose);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-extended-color-rose);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-extended-color-rose);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-rose
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-rose);
+}
+
+.toggle-pink[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-pink);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-extended-color-pink);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-extended-color-pink);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-pink
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-pink);
+}
+
+.toggle-purple[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-purple);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-purple
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-purple
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-purple
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-purple);
+}
+
+.toggle-blue[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-blue);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-extended-color-blue);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-extended-color-blue);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-blue
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-blue);
+}
+
+.toggle-light-blue[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-light-blue);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-light-blue
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-light-blue
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-light-blue
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-light-blue);
+}
+
+.toggle-teal[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-teal);
+  --md-icon-button-selected-hover-icon-color: var(--prisma-extended-color-teal);
+  --md-icon-button-selected-focus-icon-color: var(--prisma-extended-color-teal);
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-teal
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-teal);
+}
+
+.toggle-green[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-green);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-green
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-green
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-green
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-green);
+}
+
+.toggle-olive[selected] {
+  --md-icon-button-selected-icon-color: var(--prisma-extended-color-olive);
+  --md-icon-button-selected-hover-icon-color: var(
+    --prisma-extended-color-olive
+  );
+  --md-icon-button-selected-focus-icon-color: var(
+    --prisma-extended-color-olive
+  );
+  --md-icon-button-selected-pressed-icon-color: var(
+    --prisma-extended-color-olive
+  );
+  --md-icon-button-disabled-icon-color: var(--prisma-extended-color-olive);
+}

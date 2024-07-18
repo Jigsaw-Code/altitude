@@ -1,0 +1,78 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../tokens/reset';
+@use '../../tokens/opacity';
+@use './prisma-label-input';
+@use './prisma-label-regular';
+
+:host {
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100% - 4px);
+  overflow: hidden;
+
+  --mdc-ripple-selected-opacity: 0;
+  --mdc-ripple-activated-opacity: 0;
+  --mdc-ripple-focus-opacity: 0;
+  --md-icon-button-icon-size: 18px;
+  --md-icon-button-state-layer-width: 18px;
+  --md-icon-button-state-layer-height: 18px;
+}
+
+:host([full-width]) {
+  max-width: 100%;
+  width: 100%;
+
+  .prisma-label {
+    justify-content: space-between;
+  }
+}
+
+.prisma-label {
+  display: inline-flex;
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
+  align-items: center;
+  position: relative;
+
+  .label-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  prisma-icon {
+    display: inline-flex;
+  }
+
+  md-icon-button.close {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    md-icon-button.close {
+      display: inline-flex;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

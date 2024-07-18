@@ -1,0 +1,545 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../palette';
+@use '../state-layers';
+
+:root,
+.prisma-theme-light {
+  color-scheme: light;
+
+  --prisma-sys-color-primary: var(--prisma-sys-color-primary-light);
+  --prisma-sys-color-on-primary: var(--prisma-sys-color-on-primary-light);
+  --prisma-sys-color-primary-container: var(
+    --prisma-sys-color-primary-container-light
+  );
+  --prisma-sys-color-on-primary-container: var(
+    --prisma-sys-color-on-primary-container-light
+  );
+  --prisma-sys-color-secondary: var(--prisma-sys-color-secondary-light);
+  --prisma-sys-color-on-secondary: var(--prisma-sys-color-on-secondary-light);
+  --prisma-sys-color-secondary-container: var(
+    --prisma-sys-color-secondary-container-light
+  );
+  --prisma-sys-color-on-secondary-container: var(
+    --prisma-sys-color-on-secondary-container-light
+  );
+  --prisma-sys-color-tertiary: var(--prisma-sys-color-tertiary-light);
+  --prisma-sys-color-on-tertiary: var(--prisma-sys-color-on-tertiary-light);
+  --prisma-sys-color-tertiary-container: var(
+    --prisma-sys-color-tertiary-container-light
+  );
+  --prisma-sys-color-on-tertiary-container: var(
+    --prisma-sys-color-on-tertiary-container-light
+  );
+  --prisma-sys-color-error: var(--prisma-sys-color-error-light);
+  --prisma-sys-color-on-error: var(--prisma-sys-color-on-error-light);
+  --prisma-sys-color-error-container: var(
+    --prisma-sys-color-error-container-light
+  );
+  --prisma-sys-color-on-error-container: var(
+    --prisma-sys-color-on-error-container-light
+  );
+  --prisma-sys-color-outline: var(--prisma-sys-color-outline-light);
+  --prisma-sys-color-outline-variant: var(
+    --prisma-sys-color-outline-variant-light
+  );
+  --prisma-sys-color-background: var(--prisma-sys-color-background-light);
+  --prisma-sys-color-on-background: var(--prisma-sys-color-on-background-light);
+  --prisma-sys-color-surface: var(--prisma-sys-color-surface-light);
+  --prisma-sys-color-on-surface: var(--prisma-sys-color-on-surface-light);
+  --prisma-sys-color-surface-variant: var(
+    --prisma-sys-color-surface-variant-light
+  );
+  --prisma-sys-color-on-surface-variant: var(
+    --prisma-sys-color-on-surface-variant-light
+  );
+  --prisma-sys-color-container: var(--prisma-sys-color-container-light);
+
+  /* State Layers */
+  /* primary */
+  --prisma-state-layers-primary-opacity-08: var(
+    --prisma-state-layers-light-primary-opacity-08
+  );
+  --prisma-state-layers-primary-opacity-12: var(
+    --prisma-state-layers-light-primary-opacity-12
+  );
+  --prisma-state-layers-primary-opacity-16: var(
+    --prisma-state-layers-light-primary-opacity-16
+  );
+
+  --prisma-state-layers-on-primary-opacity-08: var(
+    --prisma-state-layers-light-on-primary-opacity-08
+  );
+  --prisma-state-layers-on-primary-opacity-12: var(
+    --prisma-state-layers-light-on-primary-opacity-12
+  );
+  --prisma-state-layers-on-primary-opacity-16: var(
+    --prisma-state-layers-light-on-primary-opacity-16
+  );
+
+  --prisma-state-layers-primary-container-opacity-08: var(
+    --prisma-state-layers-light-primary-container-opacity-08
+  );
+  --prisma-state-layers-primary-container-opacity-12: var(
+    --prisma-state-layers-light-primary-container-opacity-12
+  );
+  --prisma-state-layers-primary-container-opacity-16: var(
+    --prisma-state-layers-light-primary-container-opacity-16
+  );
+
+  --prisma-state-layers-on-primary-container-opacity-08: var(
+    --prisma-state-layers-light-on-primary-container-opacity-08
+  );
+  --prisma-state-layers-on-primary-container-opacity-12: var(
+    --prisma-state-layers-light-on-primary-container-opacity-12
+  );
+  --prisma-state-layers-on-primary-container-opacity-16: var(
+    --prisma-state-layers-light-on-primary-container-opacity-16
+  );
+
+  /* secondary */
+  --prisma-state-layers-secondary-opacity-08: var(
+    --prisma-state-layers-light-secondary-opacity-08
+  );
+  --prisma-state-layers-secondary-opacity-12: var(
+    --prisma-state-layers-light-secondary-opacity-12
+  );
+  --prisma-state-layers-secondary-opacity-16: var(
+    --prisma-state-layers-light-secondary-opacity-16
+  );
+
+  --prisma-state-layers-on-secondary-opacity-08: var(
+    --prisma-state-layers-light-on-secondary-opacity-08
+  );
+  --prisma-state-layers-on-secondary-opacity-12: var(
+    --prisma-state-layers-light-on-secondary-opacity-12
+  );
+  --prisma-state-layers-on-secondary-opacity-16: var(
+    --prisma-state-layers-light-on-secondary-opacity-16
+  );
+
+  --prisma-state-layers-secondary-container-opacity-08: var(
+    --prisma-state-layers-light-secondary-container-opacity-08
+  );
+  --prisma-state-layers-secondary-container-opacity-12: var(
+    --prisma-state-layers-light-secondary-container-opacity-12
+  );
+  --prisma-state-layers-secondary-container-opacity-16: var(
+    --prisma-state-layers-light-secondary-container-opacity-16
+  );
+
+  --prisma-state-layers-on-secondary-container-opacity-08: var(
+    --prisma-state-layers-light-on-secondary-container-opacity-08
+  );
+  --prisma-state-layers-on-secondary-container-opacity-12: var(
+    --prisma-state-layers-light-on-secondary-container-opacity-12
+  );
+  --prisma-state-layers-on-secondary-container-opacity-16: var(
+    --prisma-state-layers-light-on-secondary-container-opacity-16
+  );
+
+  /* tertiary */
+  --prisma-state-layers-tertiary-opacity-08: var(
+    --prisma-state-layers-light-tertiary-opacity-08
+  );
+  --prisma-state-layers-tertiary-opacity-12: var(
+    --prisma-state-layers-light-tertiary-opacity-12
+  );
+  --prisma-state-layers-tertiary-opacity-16: var(
+    --prisma-state-layers-light-tertiary-opacity-16
+  );
+
+  --prisma-state-layers-on-tertiary-opacity-08: var(
+    --prisma-state-layers-light-on-tertiary-opacity-08
+  );
+  --prisma-state-layers-on-tertiary-opacity-12: var(
+    --prisma-state-layers-light-on-tertiary-opacity-12
+  );
+  --prisma-state-layers-on-tertiary-opacity-16: var(
+    --prisma-state-layers-light-on-tertiary-opacity-16
+  );
+
+  --prisma-state-layers-tertiary-container-opacity-08: var(
+    --prisma-state-layers-light-tertiary-container-opacity-08
+  );
+  --prisma-state-layers-tertiary-container-opacity-12: var(
+    --prisma-state-layers-light-tertiary-container-opacity-12
+  );
+  --prisma-state-layers-tertiary-container-opacity-16: var(
+    --prisma-state-layers-light-tertiary-container-opacity-16
+  );
+
+  --prisma-state-layers-on-tertiary-container-opacity-08: var(
+    --prisma-state-layers-light-on-tertiary-container-opacity-08
+  );
+  --prisma-state-layers-on-tertiary-container-opacity-12: var(
+    --prisma-state-layers-light-on-tertiary-container-opacity-12
+  );
+  --prisma-state-layers-on-tertiary-container-opacity-16: var(
+    --prisma-state-layers-light-on-tertiary-container-opacity-16
+  );
+
+  /* error */
+  --prisma-state-layers-error-opacity-08: var(
+    --prisma-state-layers-light-error-opacity-08
+  );
+  --prisma-state-layers-error-opacity-12: var(
+    --prisma-state-layers-light-error-opacity-12
+  );
+  --prisma-state-layers-error-opacity-16: var(
+    --prisma-state-layers-light-error-opacity-16
+  );
+
+  --prisma-state-layers-error-container-opacity-08: var(
+    --prisma-state-layers-light-error-container-opacity-08
+  );
+  --prisma-state-layers-error-container-opacity-12: var(
+    --prisma-state-layers-light-error-container-opacity-12
+  );
+  --prisma-state-layers-error-container-opacity-16: var(
+    --prisma-state-layers-light-error-container-opacity-16
+  );
+
+  --prisma-state-layers-on-error-opacity-08: var(
+    --prisma-state-layers-light-on-error-opacity-08
+  );
+  --prisma-state-layers-on-error-opacity-12: var(
+    --prisma-state-layers-light-on-error-opacity-12
+  );
+  --prisma-state-layers-on-error-opacity-16: var(
+    --prisma-state-layers-light-on-error-opacity-16
+  );
+
+  --prisma-state-layers-on-error-container-opacity-08: var(
+    --prisma-state-layers-light-on-error-container-opacity-08
+  );
+  --prisma-state-layers-on-error-container-opacity-12: var(
+    --prisma-state-layers-light-on-error-container-opacity-12
+  );
+  --prisma-state-layers-on-error-container-opacity-16: var(
+    --prisma-state-layers-light-on-error-container-opacity-16
+  );
+
+  /* background */
+  --prisma-state-layers-background-opacity-08: var(
+    --prisma-state-layers-light-background-opacity-08
+  );
+  --prisma-state-layers-background-opacity-12: var(
+    --prisma-state-layers-light-background-opacity-12
+  );
+  --prisma-state-layers-background-opacity-16: var(
+    --prisma-state-layers-light-background-opacity-16
+  );
+
+  --prisma-state-layers-on-background-opacity-08: var(
+    --prisma-state-layers-light-on-background-opacity-08
+  );
+  --prisma-state-layers-on-background-opacity-12: var(
+    --prisma-state-layers-light-on-background-opacity-12
+  );
+  --prisma-state-layers-on-background-opacity-16: var(
+    --prisma-state-layers-light-on-background-opacity-16
+  );
+
+  /* surface */
+  --prisma-state-layers-surface-opacity-08: var(
+    --prisma-state-layers-light-surface-opacity-08
+  );
+  --prisma-state-layers-surface-opacity-12: var(
+    --prisma-state-layers-light-surface-opacity-12
+  );
+  --prisma-state-layers-surface-opacity-16: var(
+    --prisma-state-layers-light-surface-opacity-16
+  );
+
+  --prisma-state-layers-on-surface-opacity-08: var(
+    --prisma-state-layers-light-on-surface-opacity-08
+  );
+  --prisma-state-layers-on-surface-opacity-12: var(
+    --prisma-state-layers-light-on-surface-opacity-12
+  );
+  --prisma-state-layers-on-surface-opacity-16: var(
+    --prisma-state-layers-light-on-surface-opacity-16
+  );
+
+  --prisma-state-layers-surface-variant-opacity-08: var(
+    --prisma-state-layers-light-surface-variant-opacity-08
+  );
+  --prisma-state-layers-surface-variant-opacity-12: var(
+    --prisma-state-layers-light-surface-variant-opacity-12
+  );
+  --prisma-state-layers-surface-variant-opacity-16: var(
+    --prisma-state-layers-light-surface-variant-opacity-16
+  );
+
+  --prisma-state-layers-on-surface-variant-opacity-08: var(
+    --prisma-state-layers-light-on-surface-variant-opacity-08
+  );
+  --prisma-state-layers-on-surface-variant-opacity-12: var(
+    --prisma-state-layers-light-on-surface-variant-opacity-12
+  );
+  --prisma-state-layers-on-surface-variant-opacity-16: var(
+    --prisma-state-layers-light-on-surface-variant-opacity-16
+  );
+
+  /* outline */
+  --prisma-state-layers-outline-opacity-08: var(
+    --prisma-state-layers-light-outline-opacity-08
+  );
+  --prisma-state-layers-outline-opacity-12: var(
+    --prisma-state-layers-light-outline-opacity-12
+  );
+  --prisma-state-layers-outline-opacity-16: var(
+    --prisma-state-layers-light-outline-opacity-16
+  );
+
+  --prisma-state-layers-outline-variant-opacity-08: var(
+    --prisma-state-layers-light-outline-variant-opacity-08
+  );
+  --prisma-state-layers-outline-variant-opacity-12: var(
+    --prisma-state-layers-light-outline-variant-opacity-12
+  );
+  --prisma-state-layers-outline-variant-opacity-16: var(
+    --prisma-state-layers-light-outline-variant-opacity-16
+  );
+
+  /* inverse */
+  --prisma-state-layers-inverse-surface-opacity-08: var(
+    --prisma-state-layers-light-inverse-surface-opacity-08
+  );
+  --prisma-state-layers-inverse-surface-opacity-12: var(
+    --prisma-state-layers-light-inverse-surface-opacity-12
+  );
+  --prisma-state-layers-inverse-surface-opacity-16: var(
+    --prisma-state-layers-light-inverse-surface-opacity-16
+  );
+
+  --prisma-state-layers-inverse-on-surface-opacity-08: var(
+    --prisma-state-layers-light-inverse-on-surface-opacity-08
+  );
+  --prisma-state-layers-inverse-on-surface-opacity-12: var(
+    --prisma-state-layers-light-inverse-on-surface-opacity-12
+  );
+  --prisma-state-layers-inverse-on-surface-opacity-16: var(
+    --prisma-state-layers-light-inverse-on-surface-opacity-16
+  );
+
+  --prisma-state-layers-inverse-primary-opacity-08: var(
+    --prisma-state-layers-light-inverse-primary-opacity-08
+  );
+  --prisma-state-layers-inverse-primary-opacity-12: var(
+    --prisma-state-layers-light-inverse-primary-opacity-12
+  );
+  --prisma-state-layers-inverse-primary-opacity-16: var(
+    --prisma-state-layers-light-inverse-primary-opacity-16
+  );
+
+  /* shadow */
+  --prisma-state-layers-shadow-opacity-08: var(
+    --prisma-state-layers-light-shadow-opacity-08
+  );
+  --prisma-state-layers-shadow-opacity-12: var(
+    --prisma-state-layers-light-shadow-opacity-12
+  );
+  --prisma-state-layers-shadow-opacity-16: var(
+    --prisma-state-layers-light-shadow-opacity-16
+  );
+
+  --prisma-state-layers-surface-tint-opacity-08: var(
+    --prisma-state-layers-light-surface-tint-opacity-08
+  );
+  --prisma-state-layers-surface-tint-opacity-12: var(
+    --prisma-state-layers-light-surface-tint-opacity-12
+  );
+  --prisma-state-layers-surface-tint-opacity-16: var(
+    --prisma-state-layers-light-surface-tint-opacity-16
+  );
+
+  /* scrim */
+  --prisma-state-layers-scrim-opacity-08: var(
+    --prisma-state-layers-light-scrim-opacity-08
+  );
+  --prisma-state-layers-scrim-opacity-12: var(
+    --prisma-state-layers-light-scrim-opacity-12
+  );
+  --prisma-state-layers-scrim-opacity-16: var(
+    --prisma-state-layers-light-scrim-opacity-16
+  );
+
+  /* Surfaces */
+  /* Neutral */
+  --prisma-surface-neutral-1: var(--prisma-surface-neutral-light-1);
+  /* 0.05 */
+  --prisma-surface-neutral-2: var(--prisma-surface-neutral-light-2);
+  /* 0.08 */
+  --prisma-surface-neutral-3: var(--prisma-surface-neutral-light-3);
+  /* 0.11 */
+  --prisma-surface-neutral-4: var(--prisma-surface-neutral-light-4);
+  /* 0.12 */
+  --prisma-surface-neutral-5: var(--prisma-surface-neutral-light-5);
+  /* 0.14 */
+  --prisma-surface-neutral-inverse: var(--prisma-surface-neutral-inverse-light);
+  --prisma-surface-neutral-on-inverse: var(
+    --prisma-surface-neutral-on-inverse-light
+  );
+
+  /* Primary */
+  --prisma-surface-primary-1: var(--prisma-surface-primary-light-1);
+  /* 0.05 */
+  --prisma-surface-primary-2: var(--prisma-surface-primary-light-2);
+  /* 0.08 */
+  --prisma-surface-primary-3: var(--prisma-surface-primary-light-3);
+  /* 0.11 */
+  --prisma-surface-primary-4: var(--prisma-surface-primary-light-4);
+  /* 0.12 */
+  --prisma-surface-primary-5: var(--prisma-surface-primary-light-5);
+  /* 0.14 */
+  --prisma-surface-primary-inverse: var(--prisma-surface-primary-inverse-light);
+
+  /* Tertiary */
+  --prisma-surface-tertiary-1: var(--prisma-surface-tertiary-light-1);
+  /* 0.05 */
+  --prisma-surface-tertiary-2: var(--prisma-surface-tertiary-light-2);
+  /* 0.08 */
+  --prisma-surface-tertiary-3: var(--prisma-surface-tertiary-light-3);
+  /* 0.11 */
+  --prisma-surface-tertiary-4: var(--prisma-surface-tertiary-light-4);
+  /* 0.12 */
+  --prisma-surface-tertiary-5: var(--prisma-surface-tertiary-light-5);
+  /* 0.14 */
+
+  /* Extended */
+  /* Yellow */
+  --prisma-extended-color-yellow: var(--prisma-extended-color-yellow-light);
+  --prisma-extended-color-on-yellow: var(
+    --prisma-extended-color-on-yellow-light
+  );
+  --prisma-extended-color-yellow-container: var(
+    --prisma-extended-color-yellow-container-light
+  );
+  --prisma-extended-color-on-yellow-container: var(
+    --prisma-extended-color-on-yellow-container-light
+  );
+
+  /* Ocher */
+  --prisma-extended-color-ocher: var(--prisma-extended-color-ocher-light);
+  --prisma-extended-color-on-ocher: var(--prisma-extended-color-on-ocher-light);
+  --prisma-extended-color-ocher-container: var(
+    --prisma-extended-color-ocher-container-light
+  );
+  --prisma-extended-color-on-ocher-container: var(
+    --prisma-extended-color-on-ocher-container-light
+  );
+
+  /* Orange */
+  --prisma-extended-color-orange: var(--prisma-extended-color-orange-light);
+  --prisma-extended-color-on-orange: var(
+    --prisma-extended-color-on-orange-light
+  );
+  --prisma-extended-color-orange-container: var(
+    --prisma-extended-color-orange-container-light
+  );
+  --prisma-extended-color-on-orange-container: var(
+    --prisma-extended-color-on-orange-container-light
+  );
+
+  /* Rose */
+  --prisma-extended-color-rose: var(--prisma-extended-color-rose-light);
+  --prisma-extended-color-on-rose: var(--prisma-extended-color-on-rose-light);
+  --prisma-extended-color-rose-container: var(
+    --prisma-extended-color-rose-container-light
+  );
+  --prisma-extended-color-on-rose-container: var(
+    --prisma-extended-color-on-rose-container-light
+  );
+
+  /* Pink */
+  --prisma-extended-color-pink: var(--prisma-extended-color-pink-light);
+  --prisma-extended-color-on-pink: var(--prisma-extended-color-on-pink-light);
+  --prisma-extended-color-pink-container: var(
+    --prisma-extended-color-pink-container-light
+  );
+  --prisma-extended-color-on-pink-container: var(
+    --prisma-extended-color-on-pink-container-light
+  );
+
+  /* Purple */
+  --prisma-extended-color-purple: var(--prisma-extended-color-purple-light);
+  --prisma-extended-color-on-purple: var(
+    --prisma-extended-color-on-purple-light
+  );
+  --prisma-extended-color-purple-container: var(
+    --prisma-extended-color-purple-container-light
+  );
+  --prisma-extended-color-on-purple-container: var(
+    --prisma-extended-color-on-purple-container-light
+  );
+
+  /* Blue */
+  --prisma-extended-color-blue: var(--prisma-extended-color-blue-light);
+  --prisma-extended-color-on-blue: var(--prisma-extended-color-on-blue-light);
+  --prisma-extended-color-blue-container: var(
+    --prisma-extended-color-blue-container-light
+  );
+  --prisma-extended-color-on-blue-container: var(
+    --prisma-extended-color-on-blue-container-light
+  );
+
+  /* Light Blue */
+  --prisma-extended-color-light-blue: var(
+    --prisma-extended-color-light-blue-light
+  );
+  --prisma-extended-color-on-light-blue: var(
+    --prisma-extended-color-on-light-blue-light
+  );
+  --prisma-extended-color-light-blue-container: var(
+    --prisma-extended-color-light-blue-container-light
+  );
+  --prisma-extended-color-on-light-blue-container: var(
+    --prisma-extended-color-on-light-blue-container-light
+  );
+
+  /* Teal */
+  --prisma-extended-color-teal: var(--prisma-extended-color-teal-light);
+  --prisma-extended-color-on-teal: var(--prisma-extended-color-on-teal-light);
+  --prisma-extended-color-teal-container: var(
+    --prisma-extended-color-teal-container-light
+  );
+  --prisma-extended-color-on-teal-container: var(
+    --prisma-extended-color-on-teal-container-light
+  );
+
+  /* Green */
+  --prisma-extended-color-green: var(--prisma-extended-color-green-light);
+  --prisma-extended-color-on-green: var(--prisma-extended-color-on-green-light);
+  --prisma-extended-color-green-container: var(
+    --prisma-extended-color-green-container-light
+  );
+  --prisma-extended-color-on-green-container: var(
+    --prisma-extended-color-on-green-container-light
+  );
+
+  /* Olive */
+  --prisma-extended-color-olive: var(--prisma-extended-color-olive-light);
+  --prisma-extended-color-on-olive: var(--prisma-extended-color-on-olive-light);
+  --prisma-extended-color-olive-container: var(
+    --prisma-extended-color-olive-container-light
+  );
+  --prisma-extended-color-on-olive-container: var(
+    --prisma-extended-color-on-olive-container-light
+  );
+}

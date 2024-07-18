@@ -1,0 +1,139 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../../prisma/tokens/theme/theme';
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-palette: (
+  50: var(--prisma-ref-palette-primary-100),
+  100: var(--prisma-ref-palette-primary-99),
+  200: var(--prisma-ref-palette-primary-95),
+  300: var(--prisma-ref-palette-primary-90),
+  400: var(--prisma-ref-palette-primary-80),
+  500: var(--prisma-ref-palette-primary-70),
+  600: var(--prisma-ref-palette-primary-50),
+  700: var(--prisma-ref-palette-primary-50),
+  800: var(--prisma-ref-palette-primary-40),
+  900: var(--prisma-ref-palette-primary-30),
+  contrast: (
+    50: var(--prisma-sys-color-on-primary-container-light),
+    100: var(--prisma-sys-color-on-primary-container-light),
+    200: var(--prisma-sys-color-on-primary-container-light),
+    300: var(--prisma-sys-color-on-primary-container-light),
+    400: var(--prisma-sys-color-on-primary-container-light),
+    500: var(--prisma-sys-color-on-primary-light),
+    600: var(--prisma-sys-color-on-primary-light),
+    700: var(--prisma-sys-color-on-primary-light),
+    800: var(--prisma-sys-color-on-primary-light),
+    900: var(--prisma-sys-color-on-primary-light)
+  )
+);
+
+$secondary-palette: (
+  50: var(--prisma-ref-palette-secondary-100),
+  100: var(--prisma-ref-palette-secondary-99),
+  200: var(--prisma-ref-palette-secondary-95),
+  300: var(--prisma-ref-palette-secondary-90),
+  400: var(--prisma-ref-palette-secondary-80),
+  500: var(--prisma-ref-palette-secondary-70),
+  600: var(--prisma-ref-palette-secondary-50),
+  700: var(--prisma-ref-palette-secondary-50),
+  800: var(--prisma-ref-palette-secondary-40),
+  900: var(--prisma-ref-palette-secondary-30),
+  contrast: (
+    50: var(--prisma-sys-color-on-secondary-container-light),
+    100: var(--prisma-sys-color-on-secondary-container-light),
+    200: var(--prisma-sys-color-on-secondary-container-light),
+    300: var(--prisma-sys-color-on-secondary-container-light),
+    400: var(--prisma-sys-color-on-secondary-container-light),
+    500: var(--prisma-sys-color-on-secondary-light),
+    600: var(--prisma-sys-color-on-secondary-light),
+    700: var(--prisma-sys-color-on-secondary-light),
+    800: var(--prisma-sys-color-on-secondary-light),
+    900: var(--prisma-sys-color-on-secondary-light)
+  )
+);
+
+$error-palette: (
+  50: var(--prisma-ref-palette-error-100),
+  100: var(--prisma-ref-palette-error-99),
+  200: var(--prisma-ref-palette-error-95),
+  300: var(--prisma-ref-palette-error-90),
+  400: var(--prisma-ref-palette-error-80),
+  500: var(--prisma-ref-palette-error-70),
+  600: var(--prisma-ref-palette-error-50),
+  700: var(--prisma-ref-palette-error-50),
+  800: var(--prisma-ref-palette-error-40),
+  900: var(--prisma-ref-palette-error-30),
+  contrast: (
+    50: var(--prisma-sys-color-on-error-container-light),
+    100: var(--prisma-sys-color-on-error-container-light),
+    200: var(--prisma-sys-color-on-error-container-light),
+    300: var(--prisma-sys-color-on-error-container-light),
+    400: var(--prisma-sys-color-on-error-container-light),
+    500: var(--prisma-sys-color-on-error-light),
+    600: var(--prisma-sys-color-on-error-light),
+    700: var(--prisma-sys-color-on-error-light),
+    800: var(--prisma-sys-color-on-error-light),
+    900: var(--prisma-sys-color-on-error-light)
+  )
+);
+
+$palettes: (
+  primary: mat.define-palette($primary-palette),
+  accent: mat.define-palette($secondary-palette),
+  warn: mat.define-palette($error-palette)
+);
+
+:root,
+:host {
+  $light-theme: mat.define-light-theme(
+    (
+      color: $palettes
+    )
+  );
+
+  @include mat.button-theme($light-theme);
+  @include mat.checkbox-theme($light-theme);
+  @include mat.form-field-theme($light-theme);
+  @include mat.input-theme($light-theme);
+  @include mat.progress-spinner-theme($light-theme);
+  @include mat.slide-toggle-theme($light-theme);
+  @include mat.paginator-theme($light-theme);
+  @include mat.select-theme($light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  :host {
+    $dark-theme: mat.define-dark-theme(
+      (
+        color: $palettes
+      )
+    );
+
+    @include mat.button-theme($dark-theme);
+    @include mat.checkbox-theme($dark-theme);
+    @include mat.form-field-theme($dark-theme);
+    @include mat.input-theme($dark-theme);
+    @include mat.progress-spinner-theme($dark-theme);
+    @include mat.slide-toggle-theme($dark-theme);
+    @include mat.paginator-theme($dark-theme);
+    @include mat.select-theme($dark-theme);
+  }
+}

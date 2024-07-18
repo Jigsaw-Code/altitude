@@ -1,0 +1,723 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+:root,
+:host {
+  /* --- Prisma - Baseline Colors --- */
+
+  /* Core Colors */
+  --prisma-ref-palette-white: #fff;
+  --prisma-ref-palette-black: #000;
+
+  /* Primary - Ref */
+  --prisma-ref-palette-primary-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-primary-99: #fffbff;
+  --prisma-ref-palette-primary-95: #f2efff;
+  --prisma-ref-palette-primary-90: #e1dfff;
+  --prisma-ref-palette-primary-80: #c1c1ff;
+  --prisma-ref-palette-primary-70: #a1a2ff;
+  --prisma-ref-palette-primary-60: #8284fb;
+  --prisma-ref-palette-primary-50: #6869df;
+  --prisma-ref-palette-primary-40: #4e4fc4;
+  --prisma-ref-palette-primary-30: #3535ab;
+  --prisma-ref-palette-primary-20: #1b1696;
+  --prisma-ref-palette-primary-10: #08006c;
+  --prisma-ref-palette-primary-0: var(--prisma-ref-palette-black);
+
+  /* Primary - Light Mode */
+  --prisma-sys-color-primary-light: var(--prisma-ref-palette-primary-40);
+  --prisma-sys-color-on-primary-light: var(--prisma-ref-palette-primary-100);
+  --prisma-sys-color-primary-container-light: var(
+    --prisma-ref-palette-primary-90
+  );
+  --prisma-sys-color-on-primary-container-light: var(
+    --prisma-ref-palette-primary-10
+  );
+
+  /* Primary - Dark Mode */
+  --prisma-sys-color-primary-dark: var(--prisma-ref-palette-primary-80);
+  --prisma-sys-color-on-primary-dark: var(--prisma-ref-palette-primary-20);
+  --prisma-sys-color-primary-container-dark: var(
+    --prisma-ref-palette-primary-30
+  );
+  --prisma-sys-color-on-primary-container-dark: var(
+    --prisma-ref-palette-primary-90
+  );
+
+  /* Secondary - Ref */
+  --prisma-ref-palette-secondary-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-secondary-99: #fffbff;
+  --prisma-ref-palette-secondary-95: #f2efff;
+  --prisma-ref-palette-secondary-90: #e2e0f9;
+  --prisma-ref-palette-secondary-80: #c6c4dd;
+  --prisma-ref-palette-secondary-70: #aaa9c1;
+  --prisma-ref-palette-secondary-60: #908fa5;
+  --prisma-ref-palette-secondary-50: #76758b;
+  --prisma-ref-palette-secondary-40: #5d5c72;
+  --prisma-ref-palette-secondary-30: #454559;
+  --prisma-ref-palette-secondary-20: #2f2f42;
+  --prisma-ref-palette-secondary-10: #1a1a2c;
+  --prisma-ref-palette-secondary-0: var(--prisma-ref-palette-black);
+
+  /* Secondary - Light Mode */
+  --prisma-sys-color-secondary-light: var(--prisma-ref-palette-secondary-40);
+  --prisma-sys-color-on-secondary-light: var(
+    --prisma-ref-palette-secondary-100
+  );
+  --prisma-sys-color-secondary-container-light: var(
+    --prisma-ref-palette-secondary-90
+  );
+  --prisma-sys-color-on-secondary-container-light: var(
+    --prisma-ref-palette-secondary-10
+  );
+
+  /* Secondary - Dark Mode */
+  --prisma-sys-color-secondary-dark: var(--prisma-ref-palette-secondary-80);
+  --prisma-sys-color-on-secondary-dark: var(--prisma-ref-palette-secondary-20);
+  --prisma-sys-color-secondary-container-dark: var(
+    --prisma-ref-palette-secondary-30
+  );
+  --prisma-sys-color-on-secondary-container-dark: var(
+    --prisma-ref-palette-secondary-90
+  );
+
+  /* Tertiary - Ref */
+  --prisma-ref-palette-tertiary-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-tertiary-99: #f2ffee;
+  --prisma-ref-palette-tertiary-95: #e7f8ed;
+  --prisma-ref-palette-tertiary-90: #c4eed0;
+  --prisma-ref-palette-tertiary-80: #6dd58c;
+  --prisma-ref-palette-tertiary-70: #37be5f;
+  --prisma-ref-palette-tertiary-60: #1ea446;
+  --prisma-ref-palette-tertiary-50: #198639;
+  --prisma-ref-palette-tertiary-40: #146c2e;
+  --prisma-ref-palette-tertiary-30: #0f5223;
+  --prisma-ref-palette-tertiary-20: #0a3818;
+  --prisma-ref-palette-tertiary-10: #072711;
+  --prisma-ref-palette-tertiary-0: var(--prisma-ref-palette-black);
+
+  /* Tertiary - Light Mode */
+  --prisma-sys-color-tertiary-light: var(--prisma-ref-palette-tertiary-40);
+  --prisma-sys-color-on-tertiary-light: var(--prisma-ref-palette-tertiary-100);
+  --prisma-sys-color-tertiary-container-light: var(
+    --prisma-ref-palette-tertiary-90
+  );
+  --prisma-sys-color-on-tertiary-container-light: var(
+    --prisma-ref-palette-tertiary-10
+  );
+
+  /* Tertiary - Dark Mode */
+  --prisma-sys-color-tertiary-dark: var(--prisma-ref-palette-tertiary-80);
+  --prisma-sys-color-on-tertiary-dark: var(--prisma-ref-palette-tertiary-20);
+  --prisma-sys-color-tertiary-container-dark: var(
+    --prisma-ref-palette-tertiary-30
+  );
+  --prisma-sys-color-on-tertiary-container-dark: var(
+    --prisma-ref-palette-tertiary-90
+  );
+
+  /* Error - Ref */
+  --prisma-ref-palette-error-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-error-99: #fffbff;
+  --prisma-ref-palette-error-95: #ffedea;
+  --prisma-ref-palette-error-90: #ffdad6;
+  --prisma-ref-palette-error-80: #ffb4ab;
+  --prisma-ref-palette-error-70: #ff897d;
+  --prisma-ref-palette-error-60: #ff5449;
+  --prisma-ref-palette-error-50: #de3730;
+  --prisma-ref-palette-error-40: #ba1a1a;
+  --prisma-ref-palette-error-30: #93000a;
+  --prisma-ref-palette-error-20: #690005;
+  --prisma-ref-palette-error-10: #410002;
+  --prisma-ref-palette-error-0: var(--prisma-ref-palette-black);
+
+  /* Error - Light Mode */
+  --prisma-sys-color-error-light: var(--prisma-ref-palette-error-40);
+  --prisma-sys-color-on-error-light: var(--prisma-ref-palette-error-100);
+  --prisma-sys-color-error-container-light: var(--prisma-ref-palette-error-90);
+  --prisma-sys-color-on-error-container-light: var(
+    --prisma-ref-palette-error-10
+  );
+
+  /* Error - Dark Mode */
+  --prisma-sys-color-error-dark: var(--prisma-ref-palette-error-80);
+  --prisma-sys-color-on-error-dark: var(--prisma-ref-palette-error-20);
+  --prisma-sys-color-error-container-dark: var(--prisma-ref-palette-error-30);
+  --prisma-sys-color-on-error-container-dark: var(
+    --prisma-ref-palette-error-90
+  );
+
+  /* Neutral - Ref */
+  --prisma-ref-palette-neutral-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-neutral-99: #fdfcfb;
+  --prisma-ref-palette-neutral-95: #f2f2f2;
+  --prisma-ref-palette-neutral-90: #e3e3e3;
+  --prisma-ref-palette-neutral-80: #c7c7c7;
+  --prisma-ref-palette-neutral-70: #ababab;
+  --prisma-ref-palette-neutral-60: #8f8f8f;
+  --prisma-ref-palette-neutral-50: #757575;
+  --prisma-ref-palette-neutral-40: #5e5e5e;
+  --prisma-ref-palette-neutral-30: #474747;
+  --prisma-ref-palette-neutral-20: #303030;
+  --prisma-ref-palette-neutral-10: #1f1f1f;
+  --prisma-ref-palette-neutral-0: var(--prisma-ref-palette-black);
+
+  /* Surface - Light Mode */
+  --prisma-sys-color-surface-light: var(--prisma-ref-palette-neutral-100);
+  --prisma-sys-color-on-surface-light: var(--prisma-ref-palette-neutral-10);
+
+  /* Surface - Dark Mode */
+  --prisma-sys-color-surface-dark: var(--prisma-ref-palette-neutral-10);
+  --prisma-sys-color-on-surface-dark: var(--prisma-ref-palette-neutral-100);
+
+  /* Background - Light Mode */
+  --prisma-sys-color-background-light: var(--prisma-ref-palette-neutral-100);
+  --prisma-sys-color-on-background-light: var(--prisma-ref-palette-neutral-10);
+
+  /* Background - Dark Mode */
+  --prisma-sys-color-background-dark: var(--prisma-ref-palette-neutral-10);
+  --prisma-sys-color-on-background-dark: var(--prisma-ref-palette-neutral-90);
+
+  /* Outline - Light & Dark Mode */
+  --prisma-sys-color-outline-light: var(--prisma-ref-palette-neutral-50);
+  --prisma-sys-color-outline-dark: var(--prisma-ref-palette-neutral-60);
+
+  /* Container - Light & Dark Mode */
+  --prisma-sys-color-container-light: var(--prisma-ref-palette-neutral-95);
+  --prisma-sys-color-container-dark: var(--prisma-ref-palette-neutral-20);
+
+  /* Neutral Variant - Ref */
+  --prisma-ref-palette-neutral-variant-100: var(--prisma-ref-palette-white);
+  --prisma-ref-palette-neutral-variant-99: #fafdfb;
+  --prisma-ref-palette-neutral-variant-95: #eff2ef;
+  --prisma-ref-palette-neutral-variant-90: #e1e3e1;
+  --prisma-ref-palette-neutral-variant-80: #c4c7c5;
+  --prisma-ref-palette-neutral-variant-70: #a9acaa;
+  --prisma-ref-palette-neutral-variant-60: #8e918f;
+  --prisma-ref-palette-neutral-variant-50: #747775;
+  --prisma-ref-palette-neutral-variant-40: #5c5f5e;
+  --prisma-ref-palette-neutral-variant-30: #444746;
+  --prisma-ref-palette-neutral-variant-20: #2d312f;
+  --prisma-ref-palette-neutral-variant-10: #191d1c;
+  --prisma-ref-palette-neutral-variant-0: var(--prisma-ref-palette-black);
+
+  /* Surface Variant - Light Mode */
+  --prisma-sys-color-surface-variant-light: var(
+    --prisma-ref-palette-neutral-variant-90
+  );
+  --prisma-sys-color-on-surface-variant-light: var(
+    --prisma-ref-palette-neutral-variant-30
+  );
+
+  /* Surface Variant - Dark Mode */
+  --prisma-sys-color-surface-variant-dark: var(
+    --prisma-ref-palette-neutral-variant-30
+  );
+  --prisma-sys-color-on-surface-variant-dark: var(
+    --prisma-ref-palette-neutral-variant-80
+  );
+
+  /* Outline Variant - Light & Dark Mode */
+  --prisma-sys-color-outline-variant-light: var(
+    --prisma-ref-palette-neutral-variant-80
+  );
+  --prisma-sys-color-outline-variant-dark: var(
+    --prisma-ref-palette-neutral-variant-30
+  );
+
+  /* --- Prisma - Surfaces --- */
+
+  /* Neutral Surfaces Light */
+  --prisma-surface-neutral-light-1: #0000000c;
+  --prisma-surface-neutral-light-2: #00000014;
+  --prisma-surface-neutral-light-3: #0000001c;
+  --prisma-surface-neutral-light-4: #0000001e;
+  --prisma-surface-neutral-light-5: #00000023;
+  --prisma-surface-neutral-inverse-light: #303030;
+  --prisma-surface-neutral-on-inverse-light: #f2f2f2;
+
+  /* Neutral Surfaces Dark */
+  --prisma-surface-neutral-dark-1: #e3e3e30c;
+  --prisma-surface-neutral-dark-2: #e3e3e314;
+  --prisma-surface-neutral-dark-3: #e3e3e31c;
+  --prisma-surface-neutral-dark-4: #e3e3e31e;
+  --prisma-surface-neutral-dark-5: #e3e3e323;
+  --prisma-surface-neutral-inverse-dark: #e3e3e3;
+  --prisma-surface-neutral-on-inverse-dark: #303030;
+
+  /* Primary Surfaces Light */
+  --prisma-surface-primary-light-1: #4e4fc40c;
+  --prisma-surface-primary-light-2: #4e4fc414;
+  --prisma-surface-primary-light-3: #4e4fc41c;
+  --prisma-surface-primary-light-4: #4e4fc41e;
+  --prisma-surface-primary-light-5: #4e4fc423;
+  --prisma-surface-primary-inverse-light: var(--prisma-ref-palette-primary-80);
+
+  /* Primary Surfaces Dark */
+  --prisma-surface-primary-dark-1: #c1c1ff0c;
+  --prisma-surface-primary-dark-2: #c1c1ff14;
+  --prisma-surface-primary-dark-3: #c1c1ff1c;
+  --prisma-surface-primary-dark-4: #c1c1ff1e;
+  --prisma-surface-primary-dark-5: #c1c1ff23;
+  --prisma-surface-primary-inverse-dark: var(--prisma-ref-palette-primary-40);
+
+  /* Tertiary Surfaces Light */
+  --prisma-surface-tertiary-light-1: #006d3a0c;
+  --prisma-surface-tertiary-light-2: #006d3a14;
+  --prisma-surface-tertiary-light-3: #006d3a1c;
+  --prisma-surface-tertiary-light-4: #006d3a1e;
+  --prisma-surface-tertiary-light-5: #006d3a23;
+
+  /* Tertiary Surfaces Dark */
+  --prisma-surface-tertiary-dark-1: #73db950c;
+  --prisma-surface-tertiary-dark-2: #73db9514;
+  --prisma-surface-tertiary-dark-3: #73db951c;
+  --prisma-surface-tertiary-dark-4: #73db951e;
+  --prisma-surface-tertiary-dark-5: #73db9523;
+
+  /* --- Prisma - Extended Colors --- */
+
+  /* Yellow - Ref */
+  --prisma-extended-palette-yellow-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-yellow-99: #fffbff;
+  --prisma-extended-palette-yellow-95: #fff1bc;
+  --prisma-extended-palette-yellow-90: #ffe257;
+  --prisma-extended-palette-yellow-80: #e4c516;
+  --prisma-extended-palette-yellow-70: #c6aa00;
+  --prisma-extended-palette-yellow-60: #a79000;
+  --prisma-extended-palette-yellow-50: #8a7600;
+  --prisma-extended-palette-yellow-40: #6e5e00;
+  --prisma-extended-palette-yellow-30: #534600;
+  --prisma-extended-palette-yellow-20: #393000;
+  --prisma-extended-palette-yellow-10: #211b00;
+  --prisma-extended-palette-yellow-0: var(--prisma-ref-palette-black);
+
+  /* Yellow - Light Mode */
+  --prisma-extended-color-yellow-light: var(
+    --prisma-extended-palette-yellow-40
+  );
+  --prisma-extended-color-on-yellow-light: var(
+    --prisma-extended-palette-yellow-100
+  );
+  --prisma-extended-color-yellow-container-light: var(
+    --prisma-extended-palette-yellow-90
+  );
+  --prisma-extended-color-on-yellow-container-light: var(
+    --prisma-extended-palette-yellow-10
+  );
+
+  /* Yellow - Dark Mode */
+  --prisma-extended-color-yellow-dark: var(--prisma-extended-palette-yellow-80);
+  --prisma-extended-color-on-yellow-dark: var(
+    --prisma-extended-palette-yellow-20
+  );
+  --prisma-extended-color-yellow-container-dark: var(
+    --prisma-extended-palette-yellow-30
+  );
+  --prisma-extended-color-on-yellow-container-dark: var(
+    --prisma-extended-palette-yellow-90
+  );
+
+  /* Ocher - Ref */
+  --prisma-extended-palette-ocher-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-ocher-99: #fffbff;
+  --prisma-extended-palette-ocher-95: #fed;
+  --prisma-extended-palette-ocher-90: #ffddb4;
+  --prisma-extended-palette-ocher-80: #ffb955;
+  --prisma-extended-palette-ocher-70: #e59d2a;
+  --prisma-extended-palette-ocher-60: #c68307;
+  --prisma-extended-palette-ocher-50: #a46b00;
+  --prisma-extended-palette-ocher-40: #835500;
+  --prisma-extended-palette-ocher-30: #633f00;
+  --prisma-extended-palette-ocher-20: #452b00;
+  --prisma-extended-palette-ocher-10: #291800;
+  --prisma-extended-palette-ocher-0: var(--prisma-ref-palette-black);
+
+  /* Ocher - Light Mode */
+  --prisma-extended-color-ocher-light: var(--prisma-extended-palette-ocher-40);
+  --prisma-extended-color-on-ocher-light: var(
+    --prisma-extended-palette-ocher-100
+  );
+  --prisma-extended-color-ocher-container-light: var(
+    --prisma-extended-palette-ocher-90
+  );
+  --prisma-extended-color-on-ocher-container-light: var(
+    --prisma-extended-palette-ocher-10
+  );
+
+  /* Ocher - Dark Mode */
+  --prisma-extended-color-ocher-dark: var(--prisma-extended-palette-ocher-80);
+  --prisma-extended-color-on-ocher-dark: var(
+    --prisma-extended-palette-ocher-20
+  );
+  --prisma-extended-color-ocher-container-dark: var(
+    --prisma-extended-palette-ocher-30
+  );
+  --prisma-extended-color-on-ocher-container-dark: var(
+    --prisma-extended-palette-ocher-90
+  );
+
+  /* Orange - Ref */
+  --prisma-extended-palette-orange-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-orange-99: #fffbff;
+  --prisma-extended-palette-orange-95: #ffede6;
+  --prisma-extended-palette-orange-90: #ffdbcc;
+  --prisma-extended-palette-orange-80: #ffb693;
+  --prisma-extended-palette-orange-70: #ff8d50;
+  --prisma-extended-palette-orange-60: #e56f2c;
+  --prisma-extended-palette-orange-50: #c35612;
+  --prisma-extended-palette-orange-40: #a04100;
+  --prisma-extended-palette-orange-30: #7a3000;
+  --prisma-extended-palette-orange-20: #562000;
+  --prisma-extended-palette-orange-10: #351000;
+  --prisma-extended-palette-orange-0: var(--prisma-ref-palette-black);
+
+  /* Orange - Light Mode */
+  --prisma-extended-color-orange-light: var(
+    --prisma-extended-palette-orange-40
+  );
+  --prisma-extended-color-on-orange-light: var(
+    --prisma-extended-palette-orange-100
+  );
+  --prisma-extended-color-orange-container-light: var(
+    --prisma-extended-palette-orange-90
+  );
+  --prisma-extended-color-on-orange-container-light: var(
+    --prisma-extended-palette-orange-10
+  );
+
+  /* Orange - Dark Mode */
+  --prisma-extended-color-orange-dark: var(--prisma-extended-palette-orange-80);
+  --prisma-extended-color-on-orange-dark: var(
+    --prisma-extended-palette-orange-20
+  );
+  --prisma-extended-color-orange-container-dark: var(
+    --prisma-extended-palette-orange-30
+  );
+  --prisma-extended-color-on-orange-container-dark: var(
+    --prisma-extended-palette-orange-90
+  );
+
+  /* Rose - Ref */
+  --prisma-extended-palette-rose-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-rose-99: #fffbff;
+  --prisma-extended-palette-rose-95: #ffeced;
+  --prisma-extended-palette-rose-90: #ffd9dc;
+  --prisma-extended-palette-rose-80: #ffb2ba;
+  --prisma-extended-palette-rose-70: #ff8797;
+  --prisma-extended-palette-rose-60: #f75876;
+  --prisma-extended-palette-rose-50: #d53e5e;
+  --prisma-extended-palette-rose-40: #b32446;
+  --prisma-extended-palette-rose-30: #910031;
+  --prisma-extended-palette-rose-20: #670020;
+  --prisma-extended-palette-rose-10: #400011;
+  --prisma-extended-palette-rose-0: var(--prisma-ref-palette-black);
+
+  /* Rose - Light Mode */
+  --prisma-extended-color-rose-light: var(--prisma-extended-palette-rose-40);
+  --prisma-extended-color-on-rose-light: var(
+    --prisma-extended-palette-rose-100
+  );
+  --prisma-extended-color-rose-container-light: var(
+    --prisma-extended-palette-rose-90
+  );
+  --prisma-extended-color-on-rose-container-light: var(
+    --prisma-extended-palette-rose-10
+  );
+
+  /* Rose - Dark Mode */
+  --prisma-extended-color-rose-dark: var(--prisma-extended-palette-rose-80);
+  --prisma-extended-color-on-rose-dark: var(--prisma-extended-palette-rose-20);
+  --prisma-extended-color-rose-container-dark: var(
+    --prisma-extended-palette-rose-30
+  );
+  --prisma-extended-color-on-rose-container-dark: var(
+    --prisma-extended-palette-rose-90
+  );
+
+  /* Pink - Ref */
+  --prisma-extended-palette-pink-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-pink-99: #fffbff;
+  --prisma-extended-palette-pink-95: #ffecf4;
+  --prisma-extended-palette-pink-90: #ffd8ec;
+  --prisma-extended-palette-pink-80: #ffaede;
+  --prisma-extended-palette-pink-70: #f883cf;
+  --prisma-extended-palette-pink-60: #d969b3;
+  --prisma-extended-palette-pink-50: #bb4f98;
+  --prisma-extended-palette-pink-40: #9d367e;
+  --prisma-extended-palette-pink-30: #7f1b65;
+  --prisma-extended-palette-pink-20: #60004b;
+  --prisma-extended-palette-pink-10: #3b002d;
+  --prisma-extended-palette-pink-0: var(--prisma-ref-palette-black);
+
+  /* Pink - Light Mode */
+  --prisma-extended-color-pink-light: var(--prisma-extended-palette-pink-40);
+  --prisma-extended-color-on-pink-light: var(
+    --prisma-extended-palette-pink-100
+  );
+  --prisma-extended-color-pink-container-light: var(
+    --prisma-extended-palette-pink-90
+  );
+  --prisma-extended-color-on-pink-container-light: var(
+    --prisma-extended-palette-pink-10
+  );
+
+  /* Pink - Dark Mode */
+  --prisma-extended-color-pink-dark: var(--prisma-extended-palette-pink-80);
+  --prisma-extended-color-on-pink-dark: var(--prisma-extended-palette-pink-20);
+  --prisma-extended-color-pink-container-dark: var(
+    --prisma-extended-palette-pink-30
+  );
+  --prisma-extended-color-on-pink-container-dark: var(
+    --prisma-extended-palette-pink-90
+  );
+
+  /* Purple - Ref */
+  --prisma-extended-palette-purple-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-purple-99: #fffbff;
+  --prisma-extended-palette-purple-95: #fbecff;
+  --prisma-extended-palette-purple-90: #f2daff;
+  --prisma-extended-palette-purple-80: #e1b6ff;
+  --prisma-extended-palette-purple-70: #cf91ff;
+  --prisma-extended-palette-purple-60: #b673eb;
+  --prisma-extended-palette-purple-50: #9a58cf;
+  --prisma-extended-palette-purple-40: #803eb4;
+  --prisma-extended-palette-purple-30: #66219a;
+  --prisma-extended-palette-purple-20: #4c007c;
+  --prisma-extended-palette-purple-10: #2e004e;
+  --prisma-extended-palette-purple-0: var(--prisma-ref-palette-black);
+
+  /* Purple - Light Mode */
+  --prisma-extended-color-purple-light: var(
+    --prisma-extended-palette-purple-40
+  );
+  --prisma-extended-color-on-purple-light: var(
+    --prisma-extended-palette-purple-100
+  );
+  --prisma-extended-color-purple-container-light: var(
+    --prisma-extended-palette-purple-90
+  );
+  --prisma-extended-color-on-purple-container-light: var(
+    --prisma-extended-palette-purple-10
+  );
+
+  /* Purple - Dark Mode */
+  --prisma-extended-color-purple-dark: var(--prisma-extended-palette-purple-80);
+  --prisma-extended-color-on-purple-dark: var(
+    --prisma-extended-palette-purple-20
+  );
+  --prisma-extended-color-purple-container-dark: var(
+    --prisma-extended-palette-purple-30
+  );
+  --prisma-extended-color-on-purple-container-dark: var(
+    --prisma-extended-palette-purple-90
+  );
+
+  /* Blue - Ref */
+  --prisma-extended-palette-blue-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-blue-99: #fefbff;
+  --prisma-extended-palette-blue-95: #eff0ff;
+  --prisma-extended-palette-blue-90: #dce1ff;
+  --prisma-extended-palette-blue-80: #b6c4ff;
+  --prisma-extended-palette-blue-70: #8fa7ff;
+  --prisma-extended-palette-blue-60: #668aff;
+  --prisma-extended-palette-blue-50: #416def;
+  --prisma-extended-palette-blue-40: #1f53d5;
+  --prisma-extended-palette-blue-30: #003baf;
+  --prisma-extended-palette-blue-20: #00287d;
+  --prisma-extended-palette-blue-10: #00164e;
+  --prisma-extended-palette-blue-0: var(--prisma-ref-palette-black);
+
+  /* Blue - Light Mode */
+  --prisma-extended-color-blue-light: var(--prisma-extended-palette-blue-40);
+  --prisma-extended-color-on-blue-light: var(
+    --prisma-extended-palette-blue-100
+  );
+  --prisma-extended-color-blue-container-light: var(
+    --prisma-extended-palette-blue-90
+  );
+  --prisma-extended-color-on-blue-container-light: var(
+    --prisma-extended-palette-blue-10
+  );
+
+  /* Blue - Dark Mode */
+  --prisma-extended-color-blue-dark: var(--prisma-extended-palette-blue-80);
+  --prisma-extended-color-on-blue-dark: var(--prisma-extended-palette-blue-20);
+  --prisma-extended-color-blue-container-dark: var(
+    --prisma-extended-palette-blue-30
+  );
+  --prisma-extended-color-on-blue-container-dark: var(
+    --prisma-extended-palette-blue-90
+  );
+
+  /* Light Blue - Ref */
+  --prisma-extended-palette-light-blue-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-light-blue-99: #fdfbff;
+  --prisma-extended-palette-light-blue-95: #ecf0ff;
+  --prisma-extended-palette-light-blue-90: #d7e3ff;
+  --prisma-extended-palette-light-blue-80: #aac7ff;
+  --prisma-extended-palette-light-blue-70: #7facfb;
+  --prisma-extended-palette-light-blue-60: #6391de;
+  --prisma-extended-palette-light-blue-50: #4877c2;
+  --prisma-extended-palette-light-blue-40: #2b5ea7;
+  --prisma-extended-palette-light-blue-30: #01458e;
+  --prisma-extended-palette-light-blue-20: #002f65;
+  --prisma-extended-palette-light-blue-10: #001b3e;
+  --prisma-extended-palette-light-blue-0: var(--prisma-ref-palette-black);
+
+  /* Light Blue - Light Mode */
+  --prisma-extended-color-light-blue-light: var(
+    --prisma-extended-palette-light-blue-40
+  );
+  --prisma-extended-color-on-light-blue-light: var(
+    --prisma-extended-palette-light-blue-100
+  );
+  --prisma-extended-color-light-blue-container-light: var(
+    --prisma-extended-palette-light-blue-90
+  );
+  --prisma-extended-color-on-light-blue-container-light: var(
+    --prisma-extended-palette-light-blue-10
+  );
+
+  /* Light Blue - Dark Mode */
+  --prisma-extended-color-light-blue-dark: var(
+    --prisma-extended-palette-light-blue-80
+  );
+  --prisma-extended-color-on-light-blue-dark: var(
+    --prisma-extended-palette-light-blue-20
+  );
+  --prisma-extended-color-light-blue-container-dark: var(
+    --prisma-extended-palette-light-blue-30
+  );
+  --prisma-extended-color-on-light-blue-container-dark: var(
+    --prisma-extended-palette-light-blue-90
+  );
+
+  /* Teal - Ref */
+  --prisma-extended-palette-teal-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-teal-99: #f9fdff;
+  --prisma-extended-palette-teal-95: #dcf5ff;
+  --prisma-extended-palette-teal-90: #b5ebff;
+  --prisma-extended-palette-teal-80: #5bd5fa;
+  --prisma-extended-palette-teal-70: #36b9dd;
+  --prisma-extended-palette-teal-60: #009ec0;
+  --prisma-extended-palette-teal-50: #00829e;
+  --prisma-extended-palette-teal-40: #00677e;
+  --prisma-extended-palette-teal-30: #004e60;
+  --prisma-extended-palette-teal-20: #003543;
+  --prisma-extended-palette-teal-10: #001f28;
+  --prisma-extended-palette-teal-0: var(--prisma-ref-palette-black);
+
+  /* Teal - Light Mode */
+  --prisma-extended-color-teal-light: var(--prisma-extended-palette-teal-40);
+  --prisma-extended-color-on-teal-light: var(
+    --prisma-extended-palette-teal-100
+  );
+  --prisma-extended-color-teal-container-light: var(
+    --prisma-extended-palette-teal-90
+  );
+  --prisma-extended-color-on-teal-container-light: var(
+    --prisma-extended-palette-teal-10
+  );
+
+  /* Teal - Dark Mode */
+  --prisma-extended-color-teal-dark: var(--prisma-extended-palette-teal-80);
+  --prisma-extended-color-on-teal-dark: var(--prisma-extended-palette-teal-20);
+  --prisma-extended-color-teal-container-dark: var(
+    --prisma-extended-palette-teal-30
+  );
+  --prisma-extended-color-on-teal-container-dark: var(
+    --prisma-extended-palette-teal-90
+  );
+
+  /* Green - Ref */
+  --prisma-extended-palette-green-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-green-99: #f5fff3;
+  --prisma-extended-palette-green-95: #c3ffd0;
+  --prisma-extended-palette-green-90: #8ff8af;
+  --prisma-extended-palette-green-80: #73db95;
+  --prisma-extended-palette-green-70: #57bf7c;
+  --prisma-extended-palette-green-60: #39a363;
+  --prisma-extended-palette-green-50: #12894c;
+  --prisma-extended-palette-green-40: #006d3a;
+  --prisma-extended-palette-green-30: #00522a;
+  --prisma-extended-palette-green-20: #00391b;
+  --prisma-extended-palette-green-10: #00210d;
+  --prisma-extended-palette-green-0: var(--prisma-ref-palette-black);
+
+  /* Green - Light Mode */
+  --prisma-extended-color-green-light: var(--prisma-extended-palette-green-40);
+  --prisma-extended-color-on-green-light: var(
+    --prisma-extended-palette-green-100
+  );
+  --prisma-extended-color-green-container-light: var(
+    --prisma-extended-palette-green-90
+  );
+  --prisma-extended-color-on-green-container-light: var(
+    --prisma-extended-palette-green-10
+  );
+
+  /* Green - Dark Mode */
+  --prisma-extended-color-green-dark: var(--prisma-extended-palette-green-80);
+  --prisma-extended-color-on-green-dark: var(
+    --prisma-extended-palette-green-20
+  );
+  --prisma-extended-color-green-container-dark: var(
+    --prisma-extended-palette-green-30
+  );
+  --prisma-extended-color-on-green-container-dark: var(
+    --prisma-extended-palette-green-90
+  );
+
+  /* Olive - Ref */
+  --prisma-extended-palette-olive-100: var(--prisma-ref-palette-white);
+  --prisma-extended-palette-olive-99: #faffe4;
+  --prisma-extended-palette-olive-95: #dafe86;
+  --prisma-extended-palette-olive-90: #ccf079;
+  --prisma-extended-palette-olive-80: #b1d361;
+  --prisma-extended-palette-olive-70: #96b748;
+  --prisma-extended-palette-olive-60: #7c9b30;
+  --prisma-extended-palette-olive-50: #648115;
+  --prisma-extended-palette-olive-40: #4d6700;
+  --prisma-extended-palette-olive-30: #394d00;
+  --prisma-extended-palette-olive-20: #263500;
+  --prisma-extended-palette-olive-10: #151f00;
+  --prisma-extended-palette-olive-0: var(--prisma-ref-palette-black);
+
+  /* Olive - Light Mode */
+  --prisma-extended-color-olive-light: var(--prisma-extended-palette-olive-40);
+  --prisma-extended-color-on-olive-light: var(
+    --prisma-extended-palette-olive-100
+  );
+  --prisma-extended-color-olive-container-light: var(
+    --prisma-extended-palette-olive-90
+  );
+  --prisma-extended-color-on-olive-container-light: var(
+    --prisma-extended-palette-olive-10
+  );
+
+  /* Olive - Dark Mode */
+  --prisma-extended-color-olive-dark: var(--prisma-extended-palette-olive-80);
+  --prisma-extended-color-on-olive-dark: var(
+    --prisma-extended-palette-olive-20
+  );
+  --prisma-extended-color-olive-container-dark: var(
+    --prisma-extended-palette-olive-30
+  );
+  --prisma-extended-color-on-olive-container-dark: var(
+    --prisma-extended-palette-olive-90
+  );
+}

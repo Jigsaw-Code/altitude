@@ -1,0 +1,58 @@
+<!--
+ Copyright 2023 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<mat-card>
+  <mat-card-content>
+    <ng-container *ngIf="label !== 'N/A'">
+      <section
+        *ngFor="let score of scores"
+        [ngClass]="{ disabled: score.data === undefined }"
+      >
+        <span class="title">
+          <prisma-text
+            variant="title"
+            size="small"
+            [ngClass]="score.data ? score.data.toLowerCase() : 'disabled'"
+          >
+            <ng-container *ngIf="score.data === null">
+              {{ score.type }} - data not available
+            </ng-container>
+            <ng-container *ngIf="score.data !== null">
+              {{ score.data?.toLowerCase() }} {{ score.type }}
+            </ng-container>
+          </prisma-text>
+        </span>
+        <span>
+          <prisma-text as="label" variant="label" size="small">
+            {{ score.description }}
+          </prisma-text>
+        </span>
+      </section>
+    </ng-container>
+    <ng-container *ngIf="label === 'N/A'">
+      <section>
+        <span class="title">
+          <prisma-text variant="body" size="medium">
+            <ng-container> No flagger data available </ng-container>
+          </prisma-text>
+        </span>
+      </section>
+    </ng-container>
+    <app-learn-more
+      url="https://github.com/Jigsaw-Code/altitude/blob/main/docs/faq.md#how-does-the-flagger-priority-work"
+    ></app-learn-more>
+  </mat-card-content>
+</mat-card>

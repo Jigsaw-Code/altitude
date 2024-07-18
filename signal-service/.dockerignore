@@ -1,0 +1,11 @@
+# Python temp files
+__pycache__/
+**/*.py[cod]
+**/*$py.class
+
+# Unit tests and test utilities.
+**/*_test.py
+**/testing/
+
+# MongoDB files.
+/data/

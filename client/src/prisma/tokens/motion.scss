@@ -1,0 +1,89 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+:root,
+:host {
+  --prisma-sys-motion-duration-shortest: 300ms;
+  --prisma-sys-motion-duration-short: 600ms;
+  --prisma-sys-motion-duration-medium: 1200ms;
+  --prisma-sys-motion-duration-slow: 2000ms;
+
+  --prisma-sys-motion-easing-default: ease-in-out;
+  --prisma-sys-motion-cubic-bezier-default: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes prisma-clip-text {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes prisma-active-step {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes prisma-fill-in {
+  from {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes prisma-overlay-on {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes prisma-overlay-off {
+  0% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes prisma-slide-up {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2000px, 0);
+    transform: translate3d(0, 2000px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+@keyframes prisma-slide-down {
+  0% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2000px, 0);
+    transform: translate3d(0, 2000px, 0);
+  }
+}

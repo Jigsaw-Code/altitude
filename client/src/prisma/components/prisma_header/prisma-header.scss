@@ -1,0 +1,143 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../tokens/reset';
+@use '../../tokens/shape';
+@use '../../tokens/theme/theme';
+
+:host {
+  display: flex;
+}
+
+md-icon-button {
+  --md-icon-button-icon-size: 24px;
+  --md-icon-color: var(--prisma-sys-color-on-surface-variant);
+}
+
+md-checkbox {
+  --md-sys-color-primary: var(--prisma-sys-color-primary);
+  --md-checkbox-outline-color: var(--prisma-sys-color-on-surface-variant);
+  --md-checkbox-focus-outline-color: var(--prisma-sys-color-on-surface);
+  --md-checkbox-hover-outline-color: var(--prisma-sys-color-on-surface);
+  --md-checkbox-pressed-outline-color: var(--prisma-sys-color-on-surface);
+  min-width: 18px;
+}
+
+prisma-badge {
+  color: var(--prisma-sys-color-on-surface);
+  background-color: var(--prisma-surface-neutral-1);
+}
+
+.prisma-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  padding: 0 12px;
+  background-color: var(--prisma-sys-color-surface);
+  border-bottom: 1px solid var(--prisma-sys-color-surface-variant);
+
+  .icon-button {
+    display: contents;
+  }
+
+  &:not(.has-checkbox) {
+    .container-titles {
+      padding-left: 12px;
+    }
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: var(--prisma-sys-color-on-surface-variant);
+}
+
+.container-titles {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.title,
+.subtitle {
+  display: flex;
+  width: 100%;
+}
+
+.title {
+  color: var(--prisma-sys-color-on-surface);
+}
+
+.subtitle {
+  color: var(--prisma-sys-color-on-surface-variant);
+}
+
+slot[name='badge'],
+slot[name='tabs'],
+slot[name='pagination'],
+slot[name='toolbar'] {
+  display: block;
+}
+
+slot[name='badge'] {
+  margin: 0 8px;
+}
+
+slot[name='tabs'] {
+  margin-right: auto;
+
+  --md-primary-tab-container-color: transparent;
+  --md-sys-color-outline-variant: transparent;
+  --md-sys-color-primary: var(--prisma-sys-color-primary);
+}
+
+.has-prisma-tabs slot[name='tabs'] {
+  width: 32%;
+  max-width: 360px;
+  margin-right: auto;
+}
+
+slot[name='tabs'].hidden {
+  display: none;
+}
+
+slot[name='logo']::slotted(:first-child) {
+  max-width: 36px;
+  max-height: 36px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.open-slot {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.rounded-top {
+  border-radius: var(--prisma-shape-extra-large) var(--prisma-shape-extra-large)
+    0 0;
+}
+
+.rounded-bottom {
+  border-radius: 0 0 var(--prisma-shape-extra-large)
+    var(--prisma-shape-extra-large);
+}

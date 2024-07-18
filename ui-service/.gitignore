@@ -1,0 +1,11 @@
+# Python temp files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Type checking
+.pytype/
+
+# Python coverage files.
+.coverage
+/htmlcov/

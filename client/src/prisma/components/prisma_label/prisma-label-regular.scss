@@ -1,0 +1,487 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../tokens/state-layers';
+@use '../../tokens/theme/theme';
+
+.prisma-label.regular {
+  padding: 8px 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: var(--prisma-sys-color-surface);
+  border-color: var(--prisma-sys-color-surface-variant);
+
+  prisma-icon {
+    display: none;
+  }
+
+  prisma-badge {
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 8px;
+  }
+}
+
+/* Primary */
+.regular.primary {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-primary-container);
+    color: var(--prisma-sys-color-primary);
+  }
+
+  &:hover {
+    border-color: var(--prisma-sys-color-primary-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-primary);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-sys-color-primary);
+    border-color: var(--prisma-sys-color-primary);
+    color: var(--prisma-sys-color-on-primary);
+
+    prisma-badge {
+      background-color: var(--prisma-sys-color-primary-container);
+      color: var(--prisma-sys-color-primary);
+    }
+  }
+}
+
+/* secondary */
+.regular.secondary {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-secondary-container);
+    color: var(--prisma-sys-color-secondary);
+  }
+
+  &:hover {
+    border-color: var(--prisma-sys-color-secondary-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-secondary);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-sys-color-secondary);
+    border-color: var(--prisma-sys-color-secondary);
+    color: var(--prisma-sys-color-on-secondary);
+
+    prisma-badge {
+      background-color: var(--prisma-sys-color-secondary-container);
+      color: var(--prisma-sys-color-secondary);
+    }
+  }
+}
+
+/* tertiary */
+.regular.tertiary {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-tertiary-container);
+    color: var(--prisma-sys-color-tertiary);
+  }
+
+  &:hover {
+    border-color: var(--prisma-sys-color-tertiary-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-tertiary);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-sys-color-tertiary);
+    border-color: var(--prisma-sys-color-tertiary);
+    color: var(--prisma-sys-color-on-tertiary);
+
+    prisma-badge {
+      background-color: var(--prisma-sys-color-tertiary-container);
+      color: var(--prisma-sys-color-tertiary);
+    }
+  }
+}
+
+/* error */
+.regular.error {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-sys-color-error-container);
+    color: var(--prisma-sys-color-error);
+  }
+
+  &:hover {
+    border-color: var(--prisma-sys-color-error-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-sys-color-error);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-sys-color-error);
+    border-color: var(--prisma-sys-color-error);
+    color: var(--prisma-sys-color-on-error);
+
+    prisma-badge {
+      background-color: var(--prisma-sys-color-error-container);
+      color: var(--prisma-sys-color-error);
+    }
+  }
+}
+
+/* ocher */
+.regular.ocher {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-ocher-container);
+    color: var(--prisma-extended-color-ocher);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-ocher-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-ocher);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-ocher);
+    border-color: var(--prisma-extended-color-ocher);
+    color: var(--prisma-extended-color-on-ocher);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-ocher-container);
+      color: var(--prisma-extended-color-ocher);
+    }
+  }
+}
+
+/* orange */
+.regular.orange {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-orange-container);
+    color: var(--prisma-extended-color-orange);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-orange-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-orange);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-orange);
+    border-color: var(--prisma-extended-color-orange);
+    color: var(--prisma-extended-color-on-orange);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-orange-container);
+      color: var(--prisma-extended-color-orange);
+    }
+  }
+}
+
+/* yellow */
+.regular.yellow {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-yellow-container);
+    color: var(--prisma-extended-color-yellow);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-yellow-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-yellow);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-yellow);
+    border-color: var(--prisma-extended-color-yellow);
+    color: var(--prisma-extended-color-on-yellow);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-yellow-container);
+      color: var(--prisma-extended-color-yellow);
+    }
+  }
+}
+
+/* rose */
+.regular.rose {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-rose-container);
+    color: var(--prisma-extended-color-rose);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-rose-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-rose);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-rose);
+    border-color: var(--prisma-extended-color-rose);
+    color: var(--prisma-extended-color-on-rose);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-rose-container);
+      color: var(--prisma-extended-color-rose);
+    }
+  }
+}
+
+/* pink */
+.regular.pink {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-pink-container);
+    color: var(--prisma-extended-color-pink);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-pink-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-pink);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-pink);
+    border-color: var(--prisma-extended-color-pink);
+    color: var(--prisma-extended-color-on-pink);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-pink-container);
+      color: var(--prisma-extended-color-pink);
+    }
+  }
+}
+
+/* purple */
+.regular.purple {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-purple-container);
+    color: var(--prisma-extended-color-purple);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-purple-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-purple);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-purple);
+    border-color: var(--prisma-extended-color-purple);
+    color: var(--prisma-extended-color-on-purple);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-purple-container);
+      color: var(--prisma-extended-color-purple);
+    }
+  }
+}
+
+/* blue */
+.regular.blue {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-blue-container);
+    color: var(--prisma-extended-color-blue);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-blue-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-blue);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-blue);
+    border-color: var(--prisma-extended-color-blue);
+    color: var(--prisma-extended-color-on-blue);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-blue-container);
+      color: var(--prisma-extended-color-blue);
+    }
+  }
+}
+
+/* light-blue */
+.regular.light-blue {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-light-blue-container);
+    color: var(--prisma-extended-color-light-blue);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-light-blue-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-light-blue);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-light-blue);
+    border-color: var(--prisma-extended-color-light-blue);
+    color: var(--prisma-extended-color-on-light-blue);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-light-blue-container);
+      color: var(--prisma-extended-color-light-blue);
+    }
+  }
+}
+
+/* teal */
+.regular.teal {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-teal-container);
+    color: var(--prisma-extended-color-teal);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-teal-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-teal);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-teal);
+    border-color: var(--prisma-extended-color-teal);
+    color: var(--prisma-extended-color-on-teal);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-teal-container);
+      color: var(--prisma-extended-color-teal);
+    }
+  }
+}
+
+/* green */
+.regular.green {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-green-container);
+    color: var(--prisma-extended-color-green);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-green-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-green);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-green);
+    border-color: var(--prisma-extended-color-green);
+    color: var(--prisma-extended-color-on-green);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-green-container);
+      color: var(--prisma-extended-color-green);
+    }
+  }
+}
+
+/* olive */
+.regular.olive {
+  prisma-badge:not([disabled]),
+  &:hover,
+  &:focus {
+    background-color: var(--prisma-extended-color-olive-container);
+    color: var(--prisma-extended-color-olive);
+  }
+
+  &:hover {
+    border-color: var(--prisma-extended-color-olive-container);
+  }
+
+  &:focus {
+    border-color: var(--prisma-extended-color-olive);
+  }
+
+  &[selected] {
+    background-color: var(--prisma-extended-color-olive);
+    border-color: var(--prisma-extended-color-olive);
+    color: var(--prisma-extended-color-on-olive);
+
+    prisma-badge {
+      background-color: var(--prisma-extended-color-olive-container);
+      color: var(--prisma-extended-color-olive);
+    }
+  }
+}
+
+/* Disabled State */
+.regular {
+  &[disabled],
+  &[selected][disabled] {
+    pointer-events: none;
+    color: var(--prisma-sys-color-on-surface);
+    background-color: var(--prisma-state-layers-on-surface-opacity-12);
+    border: 1px solid transparent;
+
+    prisma-text {
+      opacity: var(--prisma-opacity-disabled);
+    }
+  }
+}

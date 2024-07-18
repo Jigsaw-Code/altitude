@@ -1,0 +1,272 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+x-mongodb-variables: &mongodb-variables
+  MONGO_SERVER: mongodb
+  MONGO_DATABASE: altitude
+  MONGO_USERNAME_FILE: /run/secrets/mongodb_username
+  MONGO_PASSWORD_FILE: /run/secrets/mongodb_password
+
+x-celery-variables: &celery-variables
+  CELERY_BROKER_URL: redis://redis:6379/0
+  CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+services:
+  gateway:
+    build:
+      context: ../../gateway/
+      args:
+        TAG: ${TAG:-dev}
+      labels:
+        com.google.jigsaw.tag: ${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    image: jigsaw/altitude-gateway:${TAG:-dev}
+    restart: unless-stopped
+    environment:
+      NGINX_SERVE_PATH: ${NGINX_SERVE_PATH:-}
+      NGINX_PORT: ${PORT:-8080}
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - client
+      - signal-service
+      - taskqueue-monitor
+      - ui-service
+
+  client:
+    build:
+      context: ../../client/
+      labels:
+        com.google.jigsaw.tag: ${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    image: jigsaw/altitude-client:${TAG:-dev}
+    restart: unless-stopped
+    networks:
+      - frontend
+    depends_on:
+      - ui-service
+
+  ui-service:
+    build:
+      context: ../../ui-service/
+      labels:
+        com.google.jigsaw.tag: ${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    image: jigsaw/altitude-ui-service:${TAG:-dev}
+    restart: unless-stopped
+    expose:
+      - "8081"
+    networks:
+      - backend
+    depends_on:
+      - signal-service
+
+  signal-service:
+    build:
+      context: ../../signal-service/
+      labels:
+        com.google.jigsaw.tag: ${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    image: jigsaw/altitude-signal-service:${TAG:-dev}
+    restart: unless-stopped
+    volumes:
+      - "../../signal-service/data/index:/data/index"
+    environment:
+      <<: [*mongodb-variables, *celery-variables]
+    secrets:
+      - mongodb_username
+      - mongodb_password
+    expose:
+      - "8082"
+    networks:
+      - backend
+    depends_on:
+      - mongodb
+
+  taskqueue-worker:
+    image: jigsaw/altitude-signal-service:${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    command: poetry run celery -A taskqueue.worker worker --loglevel INFO -E
+    volumes:
+      - "../../signal-service/data/index:/data/index"
+      - "../../signal-service/logs/tasks/verdict-notifier/:/logs/tasks/verdict-notifier/"
+    environment:
+      <<: [*mongodb-variables, *celery-variables]
+      ACTION_RECEIVER_URL:
+      ENABLE_PERSPECTIVE_API: false
+      ENABLE_SAFE_SEARCH_API: false
+      ENABLE_VISION_OCR_API: false
+      ENABLE_TRANSLATION_API: false
+      # Set the target language you would like to translate to.
+      # Target must be an ISO 639-1 language code. Ex: "en","es","fr"
+      # See https://cloud.google.com/translate/docs/languages
+      TRANSLATION_TARGET_LANGUAGE_CODE: "en"
+      # Set the threshold desired for the Safe Search Detection API
+      # 1: Very Unlikely
+      # 2: Unlikely
+      # 3: Possible
+      # 4: Likely
+      # 5: Very Likely
+      SAFE_SEARCH_THRESHOLD: 3
+      GOOGLE_APPLICATION_CREDENTIALS: "/run/secrets/google_app_credentials"
+    secrets:
+      - mongodb_username
+      - mongodb_password
+      - google_app_credentials
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - mongodb
+      - signal-service
+
+  taskqueue-scheduler:
+    image: jigsaw/altitude-signal-service:${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    command: >
+      poetry run celery -A taskqueue.worker beat --loglevel INFO
+      -s /data/celery/celerybeat-schedule.db
+    volumes:
+      - "../../signal-service/data/celery:/data/celery"
+    environment:
+      <<: [*mongodb-variables, *celery-variables]
+    secrets:
+      - mongodb_username
+      - mongodb_password
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - mongodb
+      - taskqueue-worker
+      - signal-service
+
+  taskqueue-monitor:
+    image: jigsaw/altitude-signal-service:${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    command: >
+      poetry run celery flower -A taskqueue.worker
+      --url_prefix=${FLOWER_URL_PREFIX:-""}tasksz
+    environment:
+      <<: *celery-variables
+    expose:
+      - "5555"
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - taskqueue-worker
+      - signal-service
+
+  redis:
+    image: redis:alpine
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+    networks:
+      - backend
+
+  mongodb:
+    build:
+      context: ../../mongodb/
+      labels:
+        com.google.jigsaw.tag: ${TAG:-dev}
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    image: jigsaw/altitude-mongodb:${TAG:-dev}
+    restart: unless-stopped
+    volumes:
+      - "../../mongodb/data/:/data/db"
+    environment:
+      <<: *mongodb-variables
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongodb_root_username
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongodb_root_password
+      MONGO_INITDB_DATABASE: admin
+    secrets:
+      - mongodb_root_username
+      - mongodb_root_password
+      - mongodb_username
+      - mongodb_password
+    expose:
+      - "27017"
+    networks:
+      - backend
+
+  mongodb-admin:
+    image: mongo-express
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_SITE_BASEURL: ${NGINX_SERVE_PATH:-}/mongodbz/
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+      ME_CONFIG_MONGODB_ADMINUSERNAME_FILE: /run/secrets/mongodb_root_username
+      ME_CONFIG_MONGODB_ADMINPASSWORD_FILE: /run/secrets/mongodb_root_password
+      ME_CONFIG_BASICAUTH_USERNAME_FILE: /run/secrets/mongodb_root_username
+      ME_CONFIG_BASICAUTH_PASSWORD_FILE: /run/secrets/mongodb_root_password
+    secrets:
+      - mongodb_root_username
+      - mongodb_root_password
+    expose:
+      - "8081"
+    networks:
+      - backend
+    depends_on:
+      - mongodb
+
+volumes:
+  redis:
+    external: false
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+
+networks:
+  default:
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+  frontend:
+    driver: bridge
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+  backend:
+    driver: bridge
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+
+secrets:
+  mongodb_root_username:
+    file: ../../secrets/mongodb_root_username.txt
+  mongodb_root_password:
+    file: ../../secrets/mongodb_root_password.txt
+  mongodb_username:
+    file: ../../secrets/mongodb_username.txt
+  mongodb_password:
+    file: ../../secrets/mongodb_password.txt
+  google_app_credentials:
+    file: ../../secrets/google_app_credentials.json

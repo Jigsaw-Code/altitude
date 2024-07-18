@@ -1,0 +1,119 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../../tokens/reset';
+@use '../../../tokens/typography';
+@use '../../../tokens/theme/theme';
+
+:host {
+  --md-primary-tab-container-color: transparent;
+  --md-primary-tab-label-text-font: var(--prisma-text-font-family);
+  --md-primary-tab-label-text-size: var(--prisma-text-font-size-title-small);
+  --md-primary-tab-divider-thickness: 0;
+  --md-sys-color-outline-variant: var(--prisma-sys-color-surface-variant);
+  --md-sys-color-on-surface: var(--prisma-sys-color-on-surface);
+  --md-sys-color-on-surface-variant: var(--prisma-sys-color-on-surface-variant);
+  --md-sys-color-primary: var(--prisma-sys-color-primary);
+}
+
+.prisma-tabs {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--prisma-sys-color-surface);
+
+  .more {
+    position: relative;
+  }
+}
+
+md-tabs {
+  width: calc(100% - 77px);
+}
+
+md-primary-tab {
+  flex: none;
+  display: block;
+}
+
+md-outlined-button {
+  --md-typography-button-line-height: var(
+    --prisma-text-line-height-label-medium
+  );
+  --md-outlined-button-outline-width: 0px;
+  --md-typography-button-text-transform: none;
+  --md-button-horizontal-padding: 10px;
+  --md-outlined-button-label-text-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+  --md-outlined-button-icon-color: var(--prisma-sys-color-on-surface-variant);
+  --md-outlined-button-label-text-font: var(--prisma-text-font-family);
+  --md-outlined-button-label-text-size: var(
+    --prisma-text-font-size-label-medium
+  );
+  --md-outlined-button-label-text-line-height: var(
+    --prisma-text-line-height-label-medium
+  );
+  --md-outlined-button-container-shape-start-start: 0;
+  --md-outlined-button-container-shape-start-end: 0;
+  --md-outlined-button-container-shape-end-start: 0;
+  --md-outlined-button-container-shape-end-end: 0;
+  --md-outlined-button-container-height: 48px;
+}
+
+md-menu {
+  --md-menu-container-color: var(--prisma-sys-color-surface);
+  min-width: 100%;
+
+  md-menu-item {
+    --md-list-item-container-color: var(--prisma-sys-color-surface);
+    --md-menu-item-hover-state-layer-color: var(--prisma-sys-color-on-surface);
+    --md-menu-item-selected-container-color: var(
+      --prisma-state-layers-primary-opacity-16
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    --md-menu-item-top-space: 0px;
+    --md-menu-item-bottom-space: 0px;
+    height: var(--prisma-text-line-height-headline-large);
+
+    prisma-text {
+      color: var(--prisma-sys-color-on-surface-variant);
+    }
+
+    &[selected] {
+      prisma-text {
+        color: var(--prisma-sys-color-primary);
+      }
+    }
+  }
+}
+
+.more-btn {
+  display: block;
+  border-bottom: 1px solid var(--prisma-sys-color-outline-variant);
+}
+
+.no-border {
+  --md-sys-color-outline-variant: transparent;
+
+  .more-btn {
+    border: none;
+  }
+}

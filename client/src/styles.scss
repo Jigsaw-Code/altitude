@@ -1,0 +1,309 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* You can add global styles to this file, and also import other style files */
+
+@use './prisma/tokens/theme/theme' as prisma-theme;
+@use './prisma/tokens/shape';
+@use './app/shared/styles/theme';
+
+// Global styles.
+// *****************************************************************************
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--prisma-sys-color-container);
+}
+
+.inherit {
+  color: inherit;
+}
+
+.primary {
+  color: var(--prisma-sys-color-primary);
+}
+
+.secondary {
+  color: var(--prisma-sys-color-secondary);
+}
+
+.tertiary {
+  color: var(--prisma-sys-color-tertiary);
+}
+
+.error {
+  color: var(--prisma-sys-color-error);
+}
+
+prisma-text,
+.neutral {
+  color: var(--prisma-sys-color-on-surface);
+}
+
+.neutral-variant {
+  color: var(--prisma-sys-color-on-surface-variant);
+}
+
+.ocher {
+  color: var(--prisma-extended-color-ocher);
+}
+
+.orange {
+  background-color: var(--prisma-extended-color-orange);
+}
+
+.yellow {
+  background-color: var(--prisma-extended-color-yellow);
+}
+
+.rose {
+  color: var(--prisma-extended-color-rose);
+}
+
+.pink {
+  color: var(--prisma-extended-color-pink);
+}
+
+.purple {
+  color: var(--prisma-extended-color-purple);
+}
+
+.blue {
+  color: var(--prisma-extended-color-blue);
+}
+
+.light-blue {
+  color: var(--prisma-extended-color-light-blue);
+}
+
+.teal {
+  color: var(--prisma-extended-color-teal);
+}
+
+.green {
+  color: var(--prisma-extended-color-green);
+}
+
+.olive {
+  color: var(--prisma-extended-color-olive);
+}
+
+prisma-action-button {
+  --prisma-sys-color-tertiary-container: var(--prisma-sys-color-surface);
+  --prisma-sys-color-on-tertiary-container: var(--prisma-sys-color-on-surface);
+  --mdc-ripple-color: var(--prisma-ref-palette-neutral-20);
+  --prisma-state-layers-on-tertiary-container-opacity-08: var(
+    --prisma-state-layers-on-surface-opacity-08
+  );
+}
+
+prisma-action-button.primary {
+  --prisma-sys-color-tertiary-container: var(
+    --prisma-sys-color-primary-container
+  );
+  --prisma-sys-color-on-tertiary-container: var(
+    --prisma-sys-color-on-primary-container
+  );
+  --mdc-ripple-color: var(--prisma-ref-palette-primary-20);
+  --prisma-state-layers-on-tertiary-container-opacity-08: var(
+    --prisma-state-layers-on-primary-container-opacity-08
+  );
+}
+
+textarea {
+  border-color: var(--prisma-sys-color-container);
+  border-radius: 10px;
+  padding: var(--prisma-shape-small);
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: var(--prisma-sys-color-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.prisma-button {
+  align-items: center;
+  border-radius: var(--prisma-shape-extra-extra-large);
+  border: none;
+  display: inline-flex;
+  font-family: var(--prisma-text-font-family);
+  gap: var(--prisma-shape-small);
+  height: 36px;
+  padding: var(--prisma-shape-large);
+  width: fit-content;
+
+  &.primary {
+    background-color: var(--prisma-sys-color-primary);
+    color: var(--prisma-sys-color-on-primary);
+  }
+
+  &:hover:not([disabled]) {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &[disabled] {
+    background-color: var(--prisma-state-layers-on-surface-opacity-12);
+    color: var(--prisma-sys-color-on-surface-variant);
+    pointer-events: none;
+  }
+}
+
+.prisma-tabs {
+  --md-primary-tab-container-color: transparent;
+  --md-primary-tab-label-text-font: var(--prisma-text-font-family);
+  --md-primary-tab-label-text-size: var(--prisma-text-font-size-title-small);
+  --md-primary-tab-divider-thickness: 0;
+  --md-sys-color-outline-variant: transparent;
+  --md-sys-color-on-surface: var(--prisma-sys-color-on-surface);
+  --md-sys-color-on-surface-variant: var(--prisma-sys-color-on-surface-variant);
+  --md-sys-color-primary: var(--prisma-sys-color-primary);
+}
+
+.tippy-box {
+  background-color: inherit;
+  margin-top: -15px;
+}
+
+.tippy-content {
+  padding: 0;
+}
+
+// Material overrides.
+// *****************************************************************************
+
+.mat-mdc-tab {
+  letter-spacing: normal;
+}
+
+.mat-mdc-tab-group {
+  --mdc-tab-text-label-color-default: var(--prisma-sys-color-primary);
+  --mdc-tab-color-default: var(--prisma-sys-color-on-surface);
+  --prisma-sys-color-on-tertiary-container: var(--prisma-sys-color-on-surface);
+  background-color: var(--prisma-sys-color-surface);
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-table {
+  --mdc-theme-surface: var(--prisma-sys-color-surface);
+  background: var(--prisma-sys-color-surface);
+}
+
+.mat-mdc-tab-header {
+  max-width: calc(100% - 165px);
+}
+
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--prisma-sys-color-surface);
+  --mdc-dialog-container-shape: var(--prisma-shape-extra-extra-large);
+
+  --mdc-dialog-with-divider-divider-color: var(--prisma-sys-color-container);
+  --mdc-dialog-subhead-color: var(--prisma-sys-color-on-surface);
+  --mdc-dialog-supporting-text-color: var(
+    --prisma-sys-color-on-surface-variant
+  );
+
+  .mat-mdc-dialog-surface.mdc-dialog__surface {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.mat-sort-header-arrow {
+  color: var(--prisma-sys-color-outline);
+}
+
+.mat-mdc-card {
+  --mdc-elevated-card-container-color: var(--prisma-sys-color-surface);
+  --mdc-elevated-card-container-shape: var(--prisma-shape-large);
+  box-shadow: none;
+  margin: var(--prisma-shape-medium) 0;
+}
+
+mat-card-header.mat-mdc-card-header,
+mat-card-content.mat-mdc-card-content,
+mat-card-footer.mat-mdc-card-footer {
+  padding: var(--prisma-shape-large);
+}
+
+mat-card-content.mat-mdc-card-header {
+  padding-bottom: var(--prisma-shape-small);
+}
+
+.mat-divider {
+  border-top-color: var(--prisma-sys-color-container);
+}
+
+.mat-icon {
+  color: var(--prisma-sys-color-on-surface-variant);
+}
+
+a .mat-icon {
+  color: inherit;
+}
+
+md-checkbox {
+  --md-sys-color-primary: var(--prisma-sys-color-primary);
+  --_outline-color: var(--prisma-sys-color-on-surface-variant);
+  --_focus-outline-color: var(--prisma-sys-color-on-surface);
+  --_hover-outline-color: var(--prisma-sys-color-on-surface);
+  --_pressed-outline-color: var(--prisma-sys-color-on-surface);
+
+  padding: var(--prisma-shape-small);
+}
+
+.mat-progress-bar {
+  --mdc-linear-progress-active-indicator-height: 10px;
+  --mdc-linear-progress-track-height: 10px;
+
+  .mdc-linear-progress__bar-inner {
+    border-top-right-radius: 50% 10px;
+    border-bottom-right-radius: 50% 10px;
+  }
+}
+
+html,
+body {
+  --mdc-theme-primary: var(--prisma-sys-color-primary);
+  --mdc-theme-surface: var(--prisma-sys-color-surface);
+  --mdc-theme-on-surface: var(--prisma-sys-color-on-surface);
+  --mdc-theme-text-primary-on-background: var(--prisma-sys-color-on-surface);
+}
+
+:root mat-paginator.mat-mdc-paginator {
+  background-color: inherit;
+}
+
+.mat-mdc-select-panel .mat-mdc-option {
+  &:hover:not(.mdc-list-item--disabled),
+  &:focus:not(.mdc-list-item--disabled),
+  &.mat-mdc-option-active,
+  &.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(
+      .mdc-list-item--disabled
+    ) {
+    background: var(--prisma-state-layers-on-surface-opacity-08);
+  }
+}

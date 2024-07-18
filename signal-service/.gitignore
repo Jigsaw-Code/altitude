@@ -1,0 +1,15 @@
+# Python temp files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytype checking
+.pytype/
+
+# Data and log files.
+/data/
+/logs/
+
+# Python coverage files.
+.coverage
+/htmlcov/

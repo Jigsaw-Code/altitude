@@ -1,0 +1,80 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "signal-service"
+version = "0.1.0"
+description = ""
+authors = ["Jigsaw <altitude@google.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10.0"
+flask = "2.2.3"
+Werkzeug = "^2.2.2"
+celery = "^5.2.7"
+celery-singleton = "^0.3.1"
+flask-celeryext = "^0.5.0"
+redis = "^4.5.5"
+flower = "^1.2.0"
+pymongo = "^4.3.2"
+jsonschema = "^4.17.0"
+absl-py = "^1.4.0"
+requests = "^2.28.2"
+mongoengine = "^0.27.0"
+flask-mongoengine = "^1.0.0"
+pytz = "^2023.3"
+threatexchange = "^1.0.10"
+google-api-python-client = "^2.88.0"
+pytesseract = "^0.3.10"
+google-cloud-vision = "^3.4.2"
+google-cloud-translate = "2.0.1"
+google-auth = "^2.22.0"
+gunicorn = "^21.2.0"
+cachetools = "^5.3.2"
+retry = "^0.9.2"
+# Need to manually add `faiss-cpu`, a subdependency of `threatexchange`, to ensure
+# it picks the right version that includes a fix for compatibility issues with
+# NumPy: https://github.com/kyamagu/faiss-wheels/pull/105.
+faiss-cpu = "^1.8.0.post1"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.15.5"
+pylint-mongoengine = "^0.5.0"
+pytype = "^2023.10.17"
+black = "^23.1.0"
+isort = "^5.12.0"
+mongomock = "^4.1.2"
+setuptools = "^65.5.1"
+unittest-xml-reporting = "^3.2.0"
+coverage = "^7.2.3"
+requests-mock = "^1.12.1"
+
+[tool.pylint]
+load-plugins="pylint_mongoengine"
+disable=[
+    "duplicate-code",
+    "fixme",  # Allow TODO-style comments.
+    "too-few-public-methods",
+    "too-many-public-methods",
+    "too-many-instance-attributes",
+    "too-many-locals"
+]
+# Don't require docstring for short code segments
+docstring-min-length=10
+# Allow some single and two letter variables.
+# TODO: Remove once we are on Pylint >= 3.0.0, as it no longer requires a
+# minimum of 3 character names. However, `pylint-mongoengine` is not yet
+# compatible with Pylint 3, so we can't upgrade yet. See
+# https://github.com/jucacrispim/pylint-mongoengine/issues/17.
+good-names="e,i,j,id"
+# Maximum number of arguments for function / method
+max-args=10
+
+[tool.isort]
+profile = "black"
+
+[virtualenvs]
+in-project = true

@@ -1,0 +1,54 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "ui-service"
+version = "0.1.0"
+description = ""
+authors = ["Jigsaw <altitude@google.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^2.2.2"
+Werkzeug = "^2.2.2"
+requests = "^2.28.1"
+flask-expects-json = "^1.7.0"
+gunicorn = "^21.2.0"
+threatexchange = "^1.1.0"
+# Need to manually add `faiss-cpu`, a subdependency of `threatexchange`, to ensure
+# it picks the right version that includes a fix for compatibility issues with
+# NumPy: https://github.com/kyamagu/faiss-wheels/pull/105.
+faiss-cpu = "^1.8.0.post1"
+
+[tool.poetry.group.dev.dependencies]
+absl-py = "^1.3.0"
+pylint = "^2.15.5"
+pytype = "^2023.10.17"
+black = "^23.1.0"
+isort = "^5.12.0"
+unittest-xml-reporting = "^3.2.0"
+coverage = "^7.2.3"
+
+[tool.pylint]
+disable=[
+    "duplicate-code",
+    "fixme",  # Allow TODO-style comments.
+    "too-few-public-methods",
+    "too-many-public-methods",
+]
+# Don't require docstring for short code segments
+docstring-min-length=10
+# Allow some single and two letter variables.
+# TODO: Remove once we are on Pylint >= 3.0.0, as it no longer requires a
+# minimum of 3 character names. However, `pylint-mongoengine` is not yet
+# compatible with Pylint 3, so we can't upgrade yet. See
+# https://github.com/jucacrispim/pylint-mongoengine/issues/17.
+good-names="e,f,i,j"
+# Maximum number of arguments for function / method
+max-args=10
+
+[tool.isort]
+profile = "black"

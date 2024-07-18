@@ -1,0 +1,232 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+:root,
+:host {
+  /* Font Family */
+  --prisma-text-font-family: 'Google Sans', sans-serif;
+  --prisma-text-font-family-display: 'Google Sans Display', sans-serif;
+
+  /* Font Weight */
+  --prisma-text-font-weight-regular: 400;
+  --prisma-text-font-weight-medium: 500;
+  --prisma-text-font-weight-bold: 700;
+
+  /* Font Size */
+  /* Display */
+  --prisma-text-font-size-display-x-large: 96px;
+  --prisma-text-font-size-display-large: 57px;
+  --prisma-text-font-size-display-medium: 45px;
+  --prisma-text-font-size-display-small: 36px;
+
+  /* Headline */
+  --prisma-text-font-size-headline-large: 32px;
+  --prisma-text-font-size-headline-medium: 28px;
+  --prisma-text-font-size-headline-small: 24px;
+
+  /* Title */
+  --prisma-text-font-size-title-large: 22px;
+  --prisma-text-font-size-title-medium: 16px;
+  --prisma-text-font-size-title-small: 14px;
+
+  /* Body */
+  --prisma-text-font-size-body-large: 16px;
+  --prisma-text-font-size-body-medium: 14px;
+  --prisma-text-font-size-body-small: 12px;
+
+  /* Label */
+  --prisma-text-font-size-label-large: 14px;
+  --prisma-text-font-size-label-medium: 12px;
+  --prisma-text-font-size-label-small: 11px;
+
+  /* Line Height */
+  /* Display */
+  --prisma-text-line-height-display-x-large: 103px;
+  --prisma-text-line-height-display-large: 64px;
+  --prisma-text-line-height-display-medium: 52px;
+  --prisma-text-line-height-display-small: 44px;
+
+  /* Headline */
+  --prisma-text-line-height-headline-large: 40px;
+  --prisma-text-line-height-headline-medium: 36px;
+  --prisma-text-line-height-headline-small: 32px;
+
+  /* Title */
+  --prisma-text-line-height-title-large: 28px;
+  --prisma-text-line-height-title-medium: 24px;
+  --prisma-text-line-height-title-small: 20px;
+
+  /* Body */
+  --prisma-text-line-height-body-large: 24px;
+  --prisma-text-line-height-body-medium: 20px;
+  --prisma-text-line-height-body-small: 16px;
+
+  /* Label */
+  --prisma-text-line-height-label-large: 20px;
+  --prisma-text-line-height-label-medium: 16px;
+  --prisma-text-line-height-label-small: 16px;
+
+  /* Letter Spacing */
+  /* Display */
+  --prisma-text-letter-spacing-display-x-large: -0.015em;
+  --prisma-text-letter-spacing-display: 0px;
+
+  /* Headline */
+  --prisma-text-letter-spacing-headline: 0px;
+
+  /* Title */
+  --prisma-text-letter-spacing-title-large: 0px;
+  --prisma-text-letter-spacing-title-medium: 0.0015em;
+  --prisma-text-letter-spacing-title-small: 0.001em;
+
+  /* Body */
+  --prisma-text-letter-spacing-body-large: 0.0015em;
+  --prisma-text-letter-spacing-body-medium: 0.0025em;
+  --prisma-text-letter-spacing-body-small: 0.004em;
+
+  /* Label */
+  --prisma-text-letter-spacing-label-large: 0.001em;
+  --prisma-text-letter-spacing-label-medium: 0.005em;
+  --prisma-text-letter-spacing-label-small: 0.005em;
+}
+
+.prisma-sys-typescale-display-x-large {
+  font-family: var(--prisma-text-font-family-display);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-display-x-large);
+  letter-spacing: var(--prisma-text-letter-spacing-display);
+  line-height: var(--prisma-text-line-height-display-x-large);
+}
+
+.prisma-sys-typescale-display-large {
+  font-family: var(--prisma-text-font-family-display);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-display-large);
+  letter-spacing: var(--prisma-text-letter-spacing-display);
+  line-height: var(--prisma-text-line-height-display-large);
+}
+
+.prisma-sys-typescale-display-medium {
+  font-family: var(--prisma-text-font-family-display);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-display-medium);
+  letter-spacing: var(--prisma-text-letter-spacing-display);
+  line-height: var(--prisma-text-line-height-display-medium);
+}
+
+.prisma-sys-typescale-display-small {
+  font-family: var(--prisma-text-font-family-display);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-display-small);
+  letter-spacing: var(--prisma-text-letter-spacing-display);
+  line-height: var(--prisma-text-line-height-display-small);
+}
+
+.prisma-sys-typescale-headline-large {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-headline-large);
+  letter-spacing: var(--prisma-text-letter-spacing-headline);
+  line-height: var(--prisma-text-line-height-headline-large);
+}
+
+.prisma-sys-typescale-headline-medium {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-headline-medium);
+  letter-spacing: var(--prisma-text-letter-spacing-headline);
+  line-height: var(--prisma-text-line-height-headline-medium);
+}
+
+.prisma-sys-typescale-headline-small {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-headline-small);
+  letter-spacing: var(--prisma-text-letter-spacing-headline);
+  line-height: var(--prisma-text-line-height-headline-small);
+}
+
+.prisma-sys-typescale-title-large {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-title-large);
+  letter-spacing: var(--prisma-text-letter-spacing-title-large);
+  line-height: var(--prisma-text-line-height-title-large);
+}
+
+.prisma-sys-typescale-title-medium {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-title-medium);
+  letter-spacing: var(--prisma-text-letter-spacing-title-medium);
+  line-height: var(--prisma-text-line-height-title-medium);
+}
+
+.prisma-sys-typescale-title-small {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-title-small);
+  letter-spacing: var(--prisma-text-letter-spacing-title-small);
+  line-height: var(--prisma-text-line-height-title-small);
+}
+
+.prisma-sys-typescale-body-large {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-body-large);
+  letter-spacing: var(--prisma-text-letter-spacing-body-large);
+  line-height: var(--prisma-text-line-height-body-large);
+}
+
+.prisma-sys-typescale-body-medium {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-body-medium);
+  letter-spacing: var(--prisma-text-letter-spacing-body-medium);
+  line-height: var(--prisma-text-line-height-body-medium);
+}
+
+.prisma-sys-typescale-body-small {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-regular);
+  font-size: var(--prisma-text-font-size-body-small);
+  letter-spacing: var(--prisma-text-letter-spacing-body-small);
+  line-height: var(--prisma-text-line-height-body-small);
+}
+
+.prisma-sys-typescale-label-large {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-label-large);
+  letter-spacing: var(--prisma-text-letter-spacing-label-large);
+  line-height: var(--prisma-text-line-height-label-large);
+}
+
+.prisma-sys-typescale-label-medium {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-label-medium);
+  letter-spacing: var(--prisma-text-letter-spacing-label-medium);
+  line-height: var(--prisma-text-line-height-label-medium);
+}
+
+.prisma-sys-typescale-label-small {
+  font-family: var(--prisma-text-font-family);
+  font-weight: var(--prisma-text-font-weight-medium);
+  font-size: var(--prisma-text-font-size-label-small);
+  letter-spacing: var(--prisma-text-letter-spacing-label-small);
+  line-height: var(--prisma-text-line-height-label-small);
+}

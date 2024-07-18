@@ -1,0 +1,414 @@
+<!--
+ Copyright 2023 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<mat-card class="summary">
+  <ng-template #totals let-icon="icon" let-total="total" let-label="label">
+    <section>
+      <prisma-icon color="primary" optical-size="20"> {{ icon }} </prisma-icon>
+      <prisma-text
+        as="label"
+        variant="headline"
+        size="small"
+        class="neutral-variant total"
+      >
+        {{ total }}
+      </prisma-text>
+      <prisma-text
+        as="label"
+        variant="title"
+        size="small"
+        class="neutral-variant label"
+      >
+        {{ label }}
+      </prisma-text>
+    </section>
+  </ng-template>
+
+  <mat-card-content *ngIf="reviewStats$ | async as stats">
+    <ng-container
+      *ngTemplateOutlet="
+        totals;
+        context: {
+          icon: 'pending_actions',
+          total: stats.countActive,
+          label: 'Open'
+        }
+      "
+    >
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        totals;
+        context: {
+          icon: 'do_not_disturb_on',
+          total: stats.countRemoved,
+          label: 'Removed'
+        }
+      "
+    >
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        totals;
+        context: {
+          icon: 'forward',
+          total: stats.countApproved,
+          label: 'Left up'
+        }
+      "
+    >
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<prisma-header rounded-top>
+  <md-tabs
+    class="prisma-tabs"
+    slot="tabs"
+    [activeTabIndex]="0"
+    auto-activate
+    #mdTabs
+    (change)="updatePanel($event)"
+  >
+    <md-primary-tab id="active-tab" aria-controls="active-panel">
+      {{ tabs.headers.active }}
+    </md-primary-tab>
+  </md-tabs>
+
+  <prisma-toolbar slot="toolbar">
+    <app-upload-button (upload)="dataSource.refresh()"></app-upload-button>
+  </prisma-toolbar>
+</prisma-header>
+
+<mat-progress-bar mode="indeterminate" *ngIf="dataSource.loading$ | async">
+</mat-progress-bar>
+
+<ng-container *ngIf="!(dataSource.error$ | async)">
+  <table
+    id="active-panel"
+    role="tabpanel"
+    aria-labelledby="active-tab"
+    mat-table
+    matSort
+    [dataSource]="dataSource"
+    [class.loading]="dataSource.loading$ | async"
+    [class.no-data]="!dataSource.data.value.length"
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          color="primary"
+          matTooltip="Select all"
+          matTooltipShowDelay="1000"
+          matTooltipHideDelay="1000"
+          aria-label="Select all"
+          (change)="toggleAll()"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [disabled]="dataSource.loading$ | async"
+        ></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let case">
+        <mat-checkbox
+          color="primary"
+          matTooltip="Select"
+          matTooltipShowDelay="1000"
+          matTooltipHideDelay="1000"
+          aria-label="Select"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(case) : null"
+          [checked]="selection.isSelected(case)"
+          [disabled]="dataSource.loading$ | async"
+        ></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="content">
+      <th mat-header-cell *matHeaderCellDef class="content">
+        <ng-container *ngIf="selection.hasValue()">
+          <app-case-list-action-button
+            icon="delete"
+            color="error"
+            [matTooltip]="MSG_CONFIG.BLOCK"
+            matTooltipShowDelay="1000"
+            matTooltipHideDelay="1000"
+            [aria-label]="MSG_CONFIG.BLOCK"
+            (click)="review(ReviewDecisionType.BLOCK)"
+          ></app-case-list-action-button>
+          <app-case-list-action-button
+            icon="select_check_box"
+            color="green"
+            [matTooltip]="MSG_CONFIG.APPROVE"
+            matTooltipShowDelay="1000"
+            matTooltipHideDelay="1000"
+            [aria-label]="MSG_CONFIG.APPROVE"
+            (click)="review(ReviewDecisionType.APPROVE)"
+          ></app-case-list-action-button>
+        </ng-container>
+      </th>
+      <td mat-cell *matCellDef="let case" class="content">
+        <span class="title">
+          <prisma-text
+            *ngIf="case.title"
+            as="h2"
+            variant="body"
+            size="large"
+            class="neutral-variant"
+          >
+            {{ case.title }}
+          </prisma-text>
+          <prisma-badge
+            *ngIf="case.isTypeImage()"
+            type="rounded"
+            value="Image"
+            color="neutral-variant"
+          ></prisma-badge>
+          <prisma-badge
+            *ngIf="case.isTypeUrl()"
+            type="rounded"
+            value="URL"
+            color="neutral-variant"
+          ></prisma-badge>
+        </span>
+
+        <span *ngIf="case.isTypeUrl()" class="url">
+          <prisma-icon color="neutral-variant" optical-size="18"
+            >link</prisma-icon
+          >
+          <prisma-text
+            as="label"
+            variant="body"
+            size="small"
+            class="neutral-variant"
+          >
+            <!-- When clicking the URL disable propagation so the click doesn't
+        bubble up to the [routerLink] and also go to the detail view.-->
+            <!-- Currently, the information to be displayed is the first element
+          of the content list.-->
+            <!--TODO: Figure out how to accomodate signals with multiple contents. -->
+            <a *ngIf="dataSource.loading$ | async">
+              {{ case.signalContent[0].contentValue }}
+            </a>
+            <a
+              href="{{ case.signalContent[0].contentValue | absoluteLink }}"
+              target="_blank"
+              (click)="$event.stopPropagation()"
+              *ngIf="!(dataSource.loading$ | async)"
+            >
+              {{ case.signalContent[0].contentValue }}
+            </a>
+          </prisma-text>
+        </span>
+
+        <prisma-text as="p" variant="body" size="small" class="neutral-variant">
+          <ul>
+            <li class="entity">
+              Entity: {{ case.associatedEntities | defaultTo : 'N/A' }}
+            </li>
+            <li
+              [matTooltip]="case.ipAddress"
+              [matTooltipDisabled]="dataSource.loading$ | async"
+              *ngIf="case.ipRegion"
+            >
+              IP Region: {{ case.ipRegion }}
+            </li>
+          </ul>
+        </prisma-text>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="priority">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by priority"
+        [matTooltip]="getSortOrderTooltipMsg('priority')"
+        [matTooltipDisabled]="dataSource.loading$ | async"
+        matTooltipShowDelay="1000"
+        matTooltipHideDelay="1000"
+        [disabled]="dataSource.loading$ | async"
+      >
+        <prisma-text variant="title" size="small" class="neutral">
+          Flagger Priority
+        </prisma-text>
+        <prisma-icon
+          class="help"
+          color="neutral-variant"
+          optical-size="16"
+          [ngxTippy]="flaggerPriorityInfoCardTemplate"
+          [tippyProps]="{
+            placement: 'bottom'
+          }"
+        >
+          help
+        </prisma-icon>
+      </th>
+      <td mat-cell *matCellDef="let case">
+        <app-priority-badge
+          [priority]="case.priority"
+          [disabled]="dataSource.loading$ | async"
+        ></app-priority-badge>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="views">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by views"
+        [matTooltip]="getSortOrderTooltipMsg('views')"
+        [matTooltipDisabled]="dataSource.loading$ | async"
+        matTooltipShowDelay="1000"
+        matTooltipHideDelay="1000"
+        [disabled]="dataSource.loading$ | async"
+      >
+        <prisma-text variant="title" size="small" class="neutral"
+          >Views</prisma-text
+        >
+      </th>
+      <td mat-cell *matCellDef="let case" class="views">
+        <span>
+          <prisma-icon color="neutral-variant" optical-size="18"
+            >visibility</prisma-icon
+          >
+          <prisma-text
+            as="p"
+            variant="body"
+            size="small"
+            class="neutral-variant"
+          >
+            {{ case.views | number : '1.0-0' | defaultTo }} views
+          </prisma-text>
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="uploadTime" class="timestamp">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by upload time"
+        [matTooltip]="getSortOrderTooltipMsg('uploadTime')"
+        [matTooltipDisabled]="dataSource.loading$ | async"
+        matTooltipShowDelay="1000"
+        matTooltipHideDelay="1000"
+        [disabled]="dataSource.loading$ | async"
+      >
+        <prisma-text variant="title" size="small" class="neutral"
+          >Timestamp</prisma-text
+        >
+      </th>
+      <td mat-cell *matCellDef="let case" class="timestamp">
+        <prisma-text as="p" variant="body" size="small" class="neutral-variant">
+          <ul>
+            <li
+              [matTooltip]="
+                'First reported by: ' +
+                case.firstFlag?.name +
+                ' ' +
+                (case.firstFlag?.createTime | formatDateAsync | async)
+              "
+              [matTooltipDisabled]="dataSource.loading$ | async"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1000"
+            >
+              <prisma-icon color="neutral-variant" optical-size="18"
+                >flag</prisma-icon
+              >
+              Reported:&nbsp;
+              <time [dateTime]="case.firstFlag?.createTime?.toISOString()">
+                {{
+                  case.firstFlag?.createTime
+                    | formatDateAsync : 'short'
+                    | async
+                    | defaultTo
+                }}
+              </time>
+            </li>
+            <li
+              [matTooltip]="
+                'Uploaded: ' + (case.uploadTime | formatDateAsync | async)
+              "
+              [matTooltipDisabled]="dataSource.loading$ | async"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1000"
+            >
+              <prisma-icon color="neutral-variant" optical-size="18"
+                >upload</prisma-icon
+              >
+              Uploaded:&nbsp;
+              <time [dateTime]="case.uploadTime.toISOString()">
+                {{ case.uploadTime | formatDateAsync : 'short' | async }}
+              </time>
+            </li>
+          </ul>
+        </prisma-text>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="flagger">
+      <th mat-header-cell *matHeaderCellDef>
+        <prisma-text variant="title" size="small" class="neutral"
+          >Flagger</prisma-text
+        >
+      </th>
+      <td mat-cell *matCellDef="let case">
+        <app-flagger
+          *ngFor="let flag of case.flags"
+          [flag]="flag"
+        ></app-flagger>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.selected]="selection.isSelected(row)"
+      [class.disabled]="dataSource.loading$"
+      (click)="navigateTo(row)"
+    ></tr>
+  </table>
+</ng-container>
+
+<prisma-icon
+  *ngIf="dataSource.error$ | async as error"
+  color="error"
+  optical-size="100"
+>
+  error
+</prisma-icon>
+
+<mat-paginator
+  [pageSize]="navigator.currentPageSize"
+  [pageIndex]="navigator.currentPageIndex"
+  [pageSizeOptions]="navigator.pageSizeOptions"
+  [disabled]="dataSource.error$ | async"
+  aria-label="Select page"
+></mat-paginator>
+
+<template #flaggerPriorityInfoCardTemplate>
+  <mat-card>
+    <mat-card-content>
+      <prisma-text>
+        Flagger priority is calculated from flagger Confidence and Severity
+        data.
+      </prisma-text>
+    </mat-card-content>
+  </mat-card>
+</template>

@@ -1,0 +1,213 @@
+<!--
+ Copyright 2023 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<ng-template #runHistory let-importer="importer">
+  <prisma-text as="p" variant="body" class="neutral-variant">
+    Last run time:
+    <time
+      [dateTime]="importer?.lastRunTime?.toISOString()"
+      [matTooltip]="importer?.lastRunTime | formatDateAsync | async | defaultTo"
+      matTooltipShowDelay="1000"
+      matTooltipHideDelay="1000"
+    >
+      {{
+        importer?.lastRunTime
+          | formatDateAsync : 'short'
+          | async
+          | defaultTo : 'Never'
+      }}
+    </time>
+  </prisma-text>
+  <prisma-text as="p" variant="body" class="neutral-variant">
+    Total import count: {{ importer?.totalImportCount ?? 0 | number }}
+  </prisma-text>
+</ng-template>
+
+<ng-template #diagnosticsInfo>
+  <mat-divider></mat-divider>
+  <prisma-text as="p" class="neutral-variant">
+    When sharing diagnostic information with the source, decisions are
+    periodically sent to them in the background.
+    <app-learn-more
+      ull="https://github.com/Jigsaw-Code/altitude/blob/main/docs/faq.md#what-does-sharing-diagnostics-entail"
+    ></app-learn-more>
+  </prisma-text>
+</ng-template>
+
+<prisma-text as="h1" variant="headline" size="large" class="neutral">
+  Importer Settings
+</prisma-text>
+
+<form [formGroup]="configForm" (ngSubmit)="save()">
+  <mat-card formGroupName="tcap">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <prisma-text as="h2" variant="title" size="large" class="neutral">
+            TCAP
+          </prisma-text>
+        </mat-card-title>
+        <mat-slide-toggle
+          color="primary"
+          formControlName="enabled"
+        ></mat-slide-toggle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          aria-label="Enter the TCAP username"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Password</mat-label>
+        <input
+          [type]="hideToken.tcap ? 'password' : 'text'"
+          matInput
+          autocomplete="off"
+          aria-label="Enter the TCAP password"
+          formControlName="password"
+        />
+        <mat-icon matSuffix (click)="hideToken.tcap = !hideToken.tcap">
+          {{ hideToken.tcap ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </mat-form-field>
+      <mat-error
+        *ngIf="configForm.controls['tcap'].hasError(ALL_PROVIDED_ERROR)"
+      >
+        Provide both a username and password.
+      </mat-error>
+
+      <ng-container
+        *ngTemplateOutlet="runHistory; context: { importer: importers['tcap'] }"
+      >
+      </ng-container>
+      <ng-container *ngTemplateOutlet="diagnosticsInfo"> </ng-container>
+      <mat-checkbox
+        color="primary"
+        formControlName="diagnosticsEnabled"
+        matTooltip="Agree to share diagnostics"
+        matTooltipShowDelay="1000"
+        matTooltipHideDelay="1000"
+        aria-label="Agree to share diagnostics"
+      >
+        <prisma-text
+          as="label"
+          variant="body"
+          size="medium"
+          class="neutral-variant"
+        >
+          I agree to share diagnostic information.
+        </prisma-text>
+      </mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card formGroupName="gifct">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <prisma-text as="h2" variant="title" size="large" class="neutral">
+            GIFCT
+          </prisma-text>
+        </mat-card-title>
+        <mat-slide-toggle
+          color="primary"
+          formControlName="enabled"
+        ></mat-slide-toggle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Privacy group ID</mat-label>
+        <input
+          matInput
+          autocomplete="off"
+          aria-label="Enter the GIFCT privacy group ID"
+          formControlName="privacyGroupId"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Access token</mat-label>
+        <input
+          [type]="hideToken.gifct ? 'password' : 'text'"
+          matInput
+          autocomplete="off"
+          aria-label="Enter the GIFCT access token"
+          formControlName="accessToken"
+        />
+        <mat-icon matSuffix (click)="hideToken.gifct = !hideToken.gifct">
+          {{ hideToken.gifct ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </mat-form-field>
+      <mat-error
+        *ngIf="configForm.controls['gifct'].hasError(ALL_PROVIDED_ERROR)"
+      >
+        Provide both a privacy group ID and access token.
+      </mat-error>
+
+      <ng-container
+        *ngTemplateOutlet="
+          runHistory;
+          context: { importer: importers['gifct'] }
+        "
+      >
+      </ng-container>
+      <ng-container *ngTemplateOutlet="diagnosticsInfo"> </ng-container>
+      <mat-checkbox
+        color="primary"
+        formControlName="diagnosticsEnabled"
+        matTooltip="Agree to share diagnostics"
+        matTooltipShowDelay="1000"
+        matTooltipHideDelay="1000"
+        aria-label="Agree to share diagnostics"
+      >
+        <prisma-text
+          as="label"
+          variant="body"
+          size="medium"
+          class="neutral-variant"
+        >
+          I agree to share diagnostic information.
+        </prisma-text>
+      </mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="footer">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="
+        configForm.invalid || configForm.pristine || (loading$ | async)
+      "
+    >
+      Save
+    </button>
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="30"
+      *ngIf="loading$ | async"
+    ></mat-progress-spinner>
+  </div>
+</form>

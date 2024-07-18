@@ -1,0 +1,247 @@
+<!--
+ Copyright 2023 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<ng-container *ngIf="case$ | async as case">
+  <mat-card class="details">
+    <mat-card-header>
+      <mat-card-title>
+        <prisma-text as="h1" variant="title" size="large">
+          Case {{ case.id }}
+        </prisma-text>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <app-content-display [case]="case"></app-content-display>
+      <section class="metadata">
+        <app-priority-badge [priority]="case.priority"></app-priority-badge>
+        <prisma-text
+          *ngIf="case.title"
+          as="h2"
+          variant="title"
+          size="large"
+          class="neutral-variant"
+        >
+          {{ case.title }}
+        </prisma-text>
+        <prisma-text
+          *ngIf="case.description"
+          as="h3"
+          variant="body"
+          size="large"
+          class="neutral-variant"
+        >
+          {{ case.description }}
+        </prisma-text>
+        <span *ngIf="case.isTypeUrl()" class="url">
+          <prisma-icon color="neutral-variant" optical-size="18"
+            >link</prisma-icon
+          >
+          <prisma-text
+            as="label"
+            variant="body"
+            size="large"
+            class="neutral-variant"
+          >
+            <a
+              href="{{ case.signalContent[0].contentValue | absoluteLink }}"
+              target="_blank"
+            >
+              {{ case.signalContent[0].contentValue }}
+            </a>
+          </prisma-text>
+        </span>
+
+        <prisma-text as="p" variant="body" size="small" class="neutral-variant">
+          <ul>
+            <li>
+              <prisma-icon color="neutral-variant" optical-size="18"
+                >visibility</prisma-icon
+              >
+              {{ case.views | defaultTo }} views
+            </li>
+            <li
+              [matTooltip]="
+                'First reported by: ' +
+                case.firstFlag?.name +
+                ' ' +
+                (case.firstFlag?.createTime | formatDateAsync | async)
+              "
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1000"
+            >
+              <prisma-icon color="neutral-variant" optical-size="18"
+                >flag</prisma-icon
+              >
+              Reported:&nbsp;
+              <time [dateTime]="case.firstFlag?.createTime?.toISOString()">
+                {{
+                  case.firstFlag?.createTime
+                    | formatDateAsync : 'short'
+                    | async
+                    | defaultTo
+                }}
+              </time>
+            </li>
+            <li
+              [matTooltip]="
+                'Uploaded: ' + (case.uploadTime | formatDateAsync | async)
+              "
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1000"
+            >
+              <prisma-icon color="neutral-variant" optical-size="18"
+                >upload</prisma-icon
+              >
+              Uploaded:&nbsp;
+              <time [dateTime]="case.uploadTime.toISOString()">
+                {{ case.uploadTime | formatDateAsync : 'short' | async }}
+              </time>
+            </li>
+            <li>Entity: {{ case.associatedEntities | defaultTo }}</li>
+            <li [matTooltip]="case.ipAddress">
+              IP Region: {{ case.ipRegion | defaultTo }}
+            </li>
+            <li>
+              <!--TODO: Modify after collecting language information-->
+              Language: {{ '' | defaultTo }}
+            </li>
+          </ul>
+        </prisma-text>
+      </section>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-footer>
+      <prisma-text as="h3" variant="title">Flagged by</prisma-text>
+      <app-flagger *ngFor="let flag of case.flags" [flag]="flag"></app-flagger>
+    </mat-card-footer>
+  </mat-card>
+
+  <div>
+    <mat-card class="decision">
+      <mat-card-header>
+        <mat-card-title>
+          <prisma-text as="h2" variant="title" size="large">
+            Decide
+          </prisma-text>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-icon class="google-symbols">nearby_share</mat-icon>
+        <span>
+          <prisma-text as="h3" variant="title">
+            Cases with shared content ({{ case.similarCaseIds.length }})
+          </prisma-text>
+          <prisma-text variant="body" size="small" class="neutral-variant">
+            Select cases you wish to action along with current review
+          </prisma-text>
+        </span>
+
+        <ng-container *ngFor="let similarCaseId of case.similarCaseIds">
+          <md-checkbox
+            name="checkbox"
+            aria-label="Select"
+            matTooltip="Select"
+            matTooltipShowDelay="1000"
+            matTooltipHideDelay="1000"
+          ></md-checkbox>
+          <a [href]="'/case/' + similarCaseId" target="_blank">
+            Case {{ similarCaseId }}
+            <prisma-icon optical-size="18">open_in_new</prisma-icon>
+          </a>
+        </ng-container>
+
+        <mat-divider></mat-divider>
+
+        <div class="notes">
+          <mat-icon>edit_notes</mat-icon>
+          <prisma-text
+            as="label"
+            variant="label"
+            size="small"
+            class="neutral-variant"
+          >
+            Notes
+          </prisma-text>
+          <textarea [formControl]="notesControl" maxlength="1000"></textarea>
+          <footer>
+            <prisma-text
+              as="label"
+              variant="label"
+              size="small"
+              class="neutral-variant"
+            >
+              {{ formStatus }}
+            </prisma-text>
+          </footer>
+        </div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-footer>
+        <button
+          mat-button
+          (click)="review(ReviewDecisionType.BLOCK)"
+          class="error"
+        >
+          <span>
+            <prisma-icon color="error" optical-size="24">delete</prisma-icon>
+            <prisma-text variant="title" size="medium" class="error">
+              {{ MSG_CONFIG.BLOCK }}
+            </prisma-text>
+          </span>
+        </button>
+        <button
+          mat-button
+          (click)="review(ReviewDecisionType.APPROVE)"
+          class="green"
+        >
+          <span>
+            <prisma-icon color="green" optical-size="24">
+              select_check_box
+            </prisma-icon>
+            <prisma-text variant="title" size="medium" class="green">
+              {{ MSG_CONFIG.APPROVE }}
+            </prisma-text>
+          </span>
+        </button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <prisma-action-rail>
+    <prisma-action-button
+      *ngIf="navigator.previous(caseId)"
+      (click)="navigatePrev()"
+      slot="top"
+      icon="navigate_before"
+      matTooltip="Previous"
+      class="neutral"
+    ></prisma-action-button>
+    <prisma-action-button
+      *ngIf="navigator.next(caseId)"
+      (click)="navigateNext()"
+      slot="top"
+      icon="navigate_next"
+      matTooltip="Next"
+      class="neutral"
+    ></prisma-action-button>
+  </prisma-action-rail>
+</ng-container>

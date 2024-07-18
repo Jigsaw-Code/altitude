@@ -1,0 +1,128 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../../tokens/reset';
+@use '../../tokens/shape';
+@use '../../tokens/motion';
+@use '../../tokens/opacity';
+@use '../../tokens/elevation';
+@use '../../tokens/state-layers';
+@use '../../tokens/theme/theme';
+
+:host {
+  --mdc-ripple-selected-opacity: 0;
+  --mdc-ripple-activated-opacity: 0;
+  --mdc-ripple-focus-opacity: 0;
+
+  display: inline-flex;
+  outline: none;
+  vertical-align: top;
+}
+
+.prisma-action-button {
+  padding: 0;
+  width: 64px;
+  height: 64px;
+  border: none;
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--prisma-shape-large);
+  font-size: 18px;
+  transition: all var(--prisma-sys-motion-duration-shortest);
+
+  .state-layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  prisma-icon,
+  ::slotted(*) {
+    display: flex;
+  }
+
+  /* Filled */
+  &.filled {
+    background-color: var(--prisma-sys-color-tertiary-container);
+    color: var(--prisma-sys-color-on-tertiary-container);
+    --mdc-ripple-color: var(--prisma-sys-color-tertiary);
+
+    &:hover {
+      box-shadow: var(--prisma-sys-elevation-1);
+      .state-layer {
+        background-color: var(
+          --prisma-state-layers-on-tertiary-container-opacity-08
+        );
+      }
+    }
+    &:focus .state-layer {
+      background-color: var(
+        --prisma-state-layers-on-tertiary-container-opacity-12
+      );
+    }
+    &[selected] .state-layer {
+      background-color: var(
+        --prisma-state-layers-on-tertiary-container-opacity-16
+      );
+    }
+  }
+
+  /* Filled Tonal */
+  &.filled-tonal {
+    background-color: var(--prisma-sys-color-surface);
+    color: var(--prisma-sys-color-on-primary-container);
+    --mdc-ripple-color: var(--prisma-sys-color-on-surface);
+
+    &:hover .state-layer {
+      background-color: var(
+        --prisma-state-layers-on-primary-container-opacity-08
+      );
+    }
+    &:focus .state-layer {
+      background-color: var(
+        --prisma-state-layers-on-primary-container-opacity-12
+      );
+    }
+    &[selected] .state-layer {
+      background-color: var(
+        --prisma-state-layers-on-primary-container-opacity-16
+      );
+    }
+  }
+
+  /* [Disabled] */
+  &[disabled],
+  &[selected][disabled] {
+    pointer-events: none;
+    background-color: var(--prisma-state-layers-on-surface-opacity-12);
+    color: var(--prisma-sys-color-on-surface);
+
+    .state-layer {
+      background-color: transparent;
+    }
+
+    prisma-icon,
+    slot {
+      opacity: var(--prisma-opacity-disabled);
+    }
+  }
+}

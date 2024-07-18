@@ -1,0 +1,112 @@
+/**
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.prisma-grid {
+  max-width: calc(100% - 194px);
+  padding-right: 12px;
+  padding-left: 28px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.prisma-grid__row {
+  --prisma-grid-gutter-x: 24px;
+  --prisma-grid-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--prisma-grid-gutter-y) * -1);
+  margin-right: calc(var(--prisma-grid-gutter-x) * -0.5);
+  margin-left: calc(var(--prisma-grid-gutter-x) * -0.5);
+}
+
+.prisma-grid__row > * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--prisma-grid-gutter-x) * 0.5);
+  padding-left: calc(var(--prisma-grid-gutter-x) * 0.5);
+  margin-top: var(--prisma-grid-gutter-y);
+}
+
+.prisma-grid__col {
+  flex: 1 0 0%;
+}
+
+.prisma-grid__col-auto {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.prisma-grid__col-1 {
+  flex: 0 0 auto;
+  width: 8.333333333333332%;
+}
+
+.prisma-grid__col-2 {
+  flex: 0 0 auto;
+  width: 16.666666666666664%;
+}
+
+.prisma-grid__col-3 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+
+.prisma-grid__col-4 {
+  flex: 0 0 auto;
+  width: calc(100% / 3);
+}
+
+.prisma-grid__col-5 {
+  flex: 0 0 auto;
+  width: 41.66666666666667%;
+}
+
+.prisma-grid__col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.prisma-grid__col-7 {
+  flex: 0 0 auto;
+  width: 58.333333333333336%;
+}
+
+.prisma-grid__col-8 {
+  flex: 0 0 auto;
+  width: 66.66666666666666%;
+}
+
+.prisma-grid__col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.prisma-grid__col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333333334%;
+}
+
+.prisma-grid__col-11 {
+  flex: 0 0 auto;
+  width: 91.66666666666666%;
+}
+
+.prisma-grid__col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}

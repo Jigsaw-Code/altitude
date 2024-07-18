@@ -1,0 +1,81 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+services:
+  gateway:
+    command: nginx-debug -g 'daemon off;'
+    expose:
+      - "80"
+
+  client:
+    build:
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - ${PORT:-8080}:4200
+      - 49153:49153
+    volumes:
+      - "../../client:/build"
+    environment:
+      SERVE_PATH: ${SERVE_PATH:-/}
+    expose:
+      - "4200"
+      # Angular live reload port.
+      - "49153"
+    networks:
+      - frontend
+
+  ui-service:
+    ports:
+      - 8081:8081
+    environment:
+      - DEBUG=true
+    volumes:
+      - "../../ui-service/src:/build"
+
+  signal-service:
+    ports:
+      - 8082:8082
+    environment:
+      - DEBUG=true
+    volumes:
+      - "../../signal-service/src:/build"
+
+  taskqueue-worker:
+    environment:
+      - DEBUG=true
+      - CSV_FILEPATH=/tcap_csvs/fake_tcap_data.csv
+    volumes:
+      - "../../signal-service/src:/build"
+      - "../../signal-service/data/tcap_csvs/:/tcap_csvs/"
+
+  taskqueue-scheduler:
+    environment:
+      - DEBUG=true
+    volumes:
+      - "../../signal-service/src:/build"
+
+  taskqueue-monitor:
+    ports:
+      - 5555:5555
+
+  mongodb:
+    ports:
+      - 27017:27017
+    volumes:
+      - "../../mongodb/initialize_db.js:/docker-entrypoint-initdb.d/initialize_db.js:ro"
+
+  mongodb-admin:
+    ports:
+      - 8181:8081

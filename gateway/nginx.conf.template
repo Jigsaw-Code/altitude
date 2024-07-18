@@ -1,0 +1,51 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    # We want to allow uploads of larger images.
+    client_max_body_size 8M;
+
+    location ^~ ${NGINX_SERVE_PATH}/ {
+        rewrite ^${NGINX_SERVE_PATH}/(.*) /$1  break;
+        proxy_pass http://client:80;
+
+        # The base href for the Angular client can only be set when built. To
+        # support it at deployment, we override it here at serving time.
+        sub_filter '<base href="/"' '<base href="${NGINX_SERVE_PATH}/"';
+        sub_filter_once on;
+
+        location ^~ ${NGINX_SERVE_PATH}/api/ {
+            # The only backend endpoints available are the target and signal APIs.
+            # The former is the entrypoint for entities that need to go through the
+            # analysis pipeline. The latter is to create new signals ad-hoc outside the
+            # regular import schedule.
+            location ^~ ${NGINX_SERVE_PATH}/api/targets/ {
+                rewrite ^${NGINX_SERVE_PATH}/api/(.*) /$1  break;
+                proxy_pass http://signal-service:8082;
+            }
+            location ^~ ${NGINX_SERVE_PATH}/api/signals/ {
+                rewrite ^${NGINX_SERVE_PATH}/api/(.*) /$1  break;
+                proxy_pass http://signal-service:8082;
+            }
+        }
+
+        # The "Backend for Frontend" which provides all data necessary for
+        # the client application.
+        location ^~ ${NGINX_SERVE_PATH}/data/ {
+            rewrite ^${NGINX_SERVE_PATH}/data/(.*) /$1  break;
+            proxy_pass http://ui-service:8081;
+        }
+
+        location ^~ ${NGINX_SERVE_PATH}/tasksz {
+            proxy_pass http://taskqueue-monitor:5555;
+        }
+
+        location ^~ ${NGINX_SERVE_PATH}/mongodbz {
+            proxy_pass http://mongodb-admin:8081;
+        }
+    }
+
+    location = ${NGINX_SERVE_PATH} {
+        return 301 http://$host:${NGINX_PORT}${NGINX_SERVE_PATH}/;
+    }
+}

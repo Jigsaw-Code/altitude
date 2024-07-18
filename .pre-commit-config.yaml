@@ -1,0 +1,205 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: name-tests-test
+        files: .*test.*\.py$
+        exclude: /testing/.*\.py$
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.0-alpha.3"
+    hooks:
+      - id: prettier
+        alias: format
+        name: prettier json/markdown/toml/yaml
+        exclude: "^client/.*$"
+        types_or: [json, markdown, toml, yaml]
+
+  - repo: https://github.com/psf/black
+    rev: "22.10.0"
+    hooks:
+      - id: black
+        alias: format
+        name: "[signal-service] Pyformat"
+        files: ^signal-service/.*$
+      - id: black
+        alias: format
+        name: "[ui-service] Pyformat"
+        files: ^ui-service/.*$
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: "[signal-service] isort"
+        files: ^signal-service/.*$
+        args: ["--profile", "black", "--filter-files"]
+      - id: isort
+        name: "[ui-service] isort"
+        files: ^ui-service/.*$
+        args: ["--profile", "black", "--filter-files"]
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: "v1.28.0"
+    hooks:
+      - id: yamllint
+        alias: lint
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.13.0
+    hooks:
+      - id: markdownlint-cli2
+        alias: lint
+
+  - repo: https://github.com/python-poetry/poetry
+    # Poetry does not work well with `pre-commit autoupdate`, so you may want to
+    # avoid updating the below `rev`. See:
+    # https://python-poetry.org/docs/master/pre-commit-hooks/#why-does-pre-commit-autoupdate-not-update-to-the-latest-version.
+    rev: "1.7.0" # 1.7.0
+    hooks:
+      # SignalService Poetry hooks.
+      - id: poetry-check
+        name: "[signal-service] poetry check"
+        args: ["-C", "./signal-service"]
+      - id: poetry-lock
+        name: "[signal-service] poetry lock"
+        args: ["-C", "./signal-service"]
+      # UiService Poetry hooks.
+      - id: poetry-check
+        name: "[ui-service] poetry check"
+        args: ["-C", "./ui-service"]
+      - id: poetry-lock
+        name: "[ui-service] poetry lock"
+        args: ["-C", "./ui-service"]
+
+  - repo: local
+    hooks:
+      # Custom client hooks.
+      - id: client-format
+        alias: format
+        name: "[client] format"
+        entry: bash -c "cd client && npm run format"
+        language: node
+        files: ^client/.*$
+      - id: client-lint
+        alias: lint
+        name: "[client] lint"
+        entry: bash -c "cd client && npm run lint:fix"
+        language: node
+        files: ^client/.*$
+        stages: [push]
+      - id: client-unittest
+        alias: unittest
+        name: "[client] unittest"
+        entry: bash -c "cd client && npm run test:ci"
+        language: node
+        files: ^client/.*$
+        require_serial: true
+        stages: [push]
+      # Custom SignalService hooks.
+      - id: poetry-install
+        name: "[signal-service] install Poetry dependencies"
+        entry: >
+          bash -c "cd signal-service &&
+          poetry install --no-interaction --no-root --quiet"
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [post-checkout]
+      - id: signal-service-lint
+        alias: lint
+        name: "[signal-service] Pylint"
+        entry: >
+          bash -c "cd signal-service &&
+          poetry run pylint -rn -sn ./src"
+        language: system
+        files: ^signal-service/.*\.py$
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+        stages: [push]
+      - id: signal-service-pytype
+        alias: pytype
+        name: "[signal-service] Pytype"
+        entry: >
+          bash -c "cd signal-service &&
+          poetry run pytype src"
+        language: system
+        files: ^signal-service/.*\.py$
+        types: [python]
+        require_serial: true
+        stages: [push]
+      - id: signal-service-unittest
+        alias: unittest
+        name: "[signal-service] unittest"
+        entry: >
+          bash -c "cd signal-service &&
+          poetry run python -m unittest discover -v -s ./src -p '*_test.py'"
+        language: system
+        files: ^signal-service/.*$
+        types: [python]
+        stages: [push]
+      # Custom UiService hooks.
+      - id: poetry-install
+        name: "[ui-service] install Poetry dependencies"
+        entry: >
+          bash -c "cd ui-service &&
+          poetry install --no-interaction --no-root --quiet"
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [post-checkout]
+      - id: ui-service-lint
+        alias: lint
+        name: "[ui-service] Pylint"
+        entry: >
+          bash -c "cd ui-service &&
+          poetry run pylint -rn -sn ./src"
+        language: system
+        files: ^ui-service/.*\.py$
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+        stages: [push]
+      - id: ui-service-pytype
+        alias: pytype
+        name: "[ui-service] Pytype"
+        entry: >
+          bash -c "cd ui-service &&
+          poetry run pytype src"
+        language: system
+        files: ^ui-service/.*\.py$
+        types: [python]
+        require_serial: true
+        stages: [push]
+      - id: ui-service-unittest
+        alias: unittest
+        name: "[ui-service] unittest"
+        entry: >
+          bash -c "cd ui-service &&
+          poetry run python -m unittest discover -v -s ./src -p '*_test.py'"
+        language: system
+        files: ^ui-service/.*$
+        types: [python]
+        stages: [push]
