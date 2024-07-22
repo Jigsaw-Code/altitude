@@ -107,7 +107,7 @@ It's simple to get started and try out the application:
 
    You can provide such as author metadata, to ensure moderators have as much
    context as needed during review. Consult the [OpenAPI spec](./api.yml) and
-   [documentation](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Jigsaw-Code/altitude/main/signal-service/api.yml)
+   [documentation](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Jigsaw-Code/altitude/main/api.yml)
    for more options.
 
 ## Further integration
