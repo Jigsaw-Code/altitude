@@ -17,3 +17,7 @@ services:
   gateway:
     ports:
       - ${PORT:-8080}:80
+
+  hma:
+    environment:
+      OMM_CONFIG: /config/config_prod.py

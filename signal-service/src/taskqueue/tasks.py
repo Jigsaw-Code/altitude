@@ -52,7 +52,7 @@ from models.importer import ImporterConfig, ImporterLoadError
 from models.signal import Content, Signal, Source, Sources
 from models.target import FeatureSet, Target
 from taskqueue.config import EXPORT_DIAGNOSTICS_FREQUENCY_DAYS
-from utils import hashing
+from utils import hma
 
 # The expiration time for importer task locks.
 SIGNAL_IMPORTER_LOCK_EXPIRATION_SEC = 60 * 60 * 1  # 1 hour
@@ -103,9 +103,8 @@ def generate_hashes(target_id: str):
     logging.info("Running hashing task for target %s", target_id)
 
     target = Target.objects.get(id=target_id)
-    pdq_digest = PdqSignal.hash_from_bytes(target.feature_set.image.data)
-
-    if not pdq_digest:
+    hash = hma.hash_from_bytes(hma.ContentType.IMAGE, target.feature_set.image.data)
+    if not (hash and hash.pdq):
         logging.info(
             "PDQ hash for target %s is unusable because the quality is too low. The "
             "provided image is probably too small.",
@@ -113,10 +112,10 @@ def generate_hashes(target_id: str):
         )
         return None
 
-    target.feature_set.image.pdq_digest = pdq_digest
+    target.feature_set.image.pdq_digest = hash.pdq
     target.save()
 
-    return pdq_digest
+    return hash.pdq
 
 
 @shared_task(
@@ -397,15 +396,16 @@ def process_new_signals(signal_ids: Iterable[str]):
     signals = Signal.objects.in_bulk(signal_ids)
 
     for signal in signals.values():
-        if signal.is_url_only:
-            url = signal.content[0].value
-            pdq_digest = hashing.generate_pdq_hash_from_url(url)
+        if not signal.is_url_only:
+            continue
 
-            if pdq_digest:
-                signal.content.append(
-                    Content(value=pdq_digest, content_type=Content.ContentType.HASH_PDQ)
-                )
-                signal.save()
+        url = signal.content[0].value
+        hash = hma.hash_from_url(url)
+        if hash and hash.pdq:
+            signal.content.append(
+                Content(value=hash.pdq, content_type=Content.ContentType.HASH_PDQ)
+            )
+            signal.save()
 
     # URL-based signals are currently processed and converted to hash and passed through the
     # same pipeline as hash-based signals. If the URL was unable to be processed to a hash,

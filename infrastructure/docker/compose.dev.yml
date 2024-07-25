@@ -79,3 +79,9 @@ services:
   mongodb-admin:
     ports:
       - 8181:8081
+
+  hma:
+    ports:
+      - 5000:5000
+    environment:
+      OMM_CONFIG: /config/config_dev.py

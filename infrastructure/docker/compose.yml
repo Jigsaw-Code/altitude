@@ -23,6 +23,13 @@ x-celery-variables: &celery-variables
   CELERY_BROKER_URL: redis://redis:6379/0
   CELERY_RESULT_BACKEND: redis://redis:6379/0
 
+x-postgres-variables: &postgres-variables
+  POSTGRES_USER: media_match
+  # TODO: Use a secret instead.
+  POSTGRES_PASSWORD: hunter2
+  POSTGRESS_HOST: hma-db
+  POSTGRESS_DBNAME: media_match
+
 services:
   gateway:
     build:
@@ -138,6 +145,7 @@ services:
       - redis
       - mongodb
       - signal-service
+      - hma
 
   taskqueue-scheduler:
     image: jigsaw/altitude-signal-service:${TAG:-dev}
@@ -240,7 +248,43 @@ services:
     depends_on:
       - mongodb
 
+  hma:
+    image: ghcr.io/facebook/threatexchange/hma:1.0.3
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    volumes:
+      - "../hma/:/config/"
+    environment:
+      <<: *postgres-variables
+    expose:
+      - "5000"
+    networks:
+      - backend
+    depends_on:
+      - hma-db
+    command: >
+      bash -c "MIGRATION_COMMAND=1 flask --app OpenMediaMatch.app db upgrade
+      --directory OpenMediaMatch/migrations
+      && MIGRATION_COMMAND=0 flask --app OpenMediaMatch.app run --host=0.0.0.0"
+
+  hma-db:
+    image: postgres:latest
+    labels:
+      com.google.jigsaw.tag: ${TAG:-dev}
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      <<: *postgres-variables
+      POSTGRES_MULTIPLE_DATABASES: media_match
+    expose:
+      - "5432"
+    networks:
+      - backend
+
 volumes:
+  postgres-data:
   redis:
     external: false
     labels:
