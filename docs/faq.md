@@ -103,7 +103,7 @@ authentication.
 Yes. Altitude does not provide user accounts, but multiple users can use the
 tool at the same time.
 
-## How do I change the UI to to rename the _"Remove"_ review decision?
+## How do I change the UI to rename the _"Remove"_ review decision?
 
 We understand that not all platforms deal with content the same way. Maybe you
 block content or take another action instead of removing it, and want the action
