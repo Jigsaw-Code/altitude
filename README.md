@@ -59,8 +59,8 @@ It's simple to get started and try out the application:
 1. **Clone this repository**
 
    ```sh
-   git clone https://github.com/Jigsaw-Code/platform-defender
-   cd platform-defender
+   git clone https://github.com/Jigsaw-Code/altitude
+   cd altitude
    ```
 
 1. **Configure and run the stack locally.**
