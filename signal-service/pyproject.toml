@@ -13,7 +13,7 @@ packages = [{include = "src"}]
 [tool.poetry.dependencies]
 python = "^3.10.0"
 flask = "2.2.3"
-Werkzeug = "^2.2.2"
+Werkzeug = "^3.0.6"
 celery = "^5.2.7"
 celery-singleton = "^0.3.1"
 flask-celeryext = "^0.5.0"
