@@ -16,7 +16,7 @@ flask = "^2.2.2"
 Werkzeug = "^2.2.2"
 requests = "^2.28.1"
 flask-expects-json = "^1.7.0"
-gunicorn = "^21.2.0"
+gunicorn = "^23.0.0"
 threatexchange = "^1.1.0"
 # Need to manually add `faiss-cpu`, a subdependency of `threatexchange`, to ensure
 # it picks the right version that includes a fix for compatibility issues with
